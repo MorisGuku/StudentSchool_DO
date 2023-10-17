@@ -1,5 +1,7 @@
-﻿using HW_2;
+﻿using System.IO;
 using System.Net;
+using test;
+using static System.Net.Mime.MediaTypeNames;
 
 while (true)
 {
@@ -13,25 +15,14 @@ while (true)
     switch (IntInputCheck())
     {
         case 1:
-            try
-            {
-                var filePath = "VeryImportantText.txt";
-                ConsoleClr.Service("Enter the number of lines you want to output: ");
-                var numberOfLines = IntInputCheck();
+            var filePath = "VeryImportantText.txt";
+            ConsoleClr.Service("Enter the number of lines you want to output: ");
+            var numberOfLines = IntInputCheck();
 
-                string[] lines = FileReader.ReadLines(filePath, numberOfLines);
-                foreach (string line in lines)
-                {
-                    Console.WriteLine(line);
-                }
-            }
-            catch (FileNotFoundException)
+            string[] lines = FileReader.ReadLines(filePath, numberOfLines);
+            foreach (string line in lines)
             {
-                ConsoleClr.Errors("An exception occurred: FileNotFoundException");// Handle exception FileNotFoundException
-            }
-            catch (Exception ex)
-            {
-                ConsoleClr.Errors($"An exception occurred: {ex.Message}");
+                Console.WriteLine(line);
             }
             ConsoleClr.Menu("Do you want to perform the operation again(1) or exit to the main menu(2)?");
             if (IntInputCheck() == 1)
@@ -55,7 +46,7 @@ while (true)
                         await writer.WriteLineAsync(reply);
                         ConsoleClr.Service("The file was successfully saved.");
                     }
-                }
+                 }
             }
             catch (FileNotFoundException)
             {
