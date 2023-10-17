@@ -15,7 +15,7 @@ while (true)
         case 1:
             try
             {
-                var filePath = "VeryImportantText.txt";
+                var filePath = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent + @"\VeryImportantText.txt";
                 ConsoleClr.Service("Enter the number of lines you want to output: ");
                 var numberOfLines = IntInputCheck();
 
