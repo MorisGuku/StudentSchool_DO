@@ -4,21 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace hw_2_
+namespace hw_2
 {
     public class Fibonachi
     {
-        public static int GetFibonachi(int StepN)
+        public static int GetFibonachi(int stepN)
         {
-            int FirstNumberFibonachi = 0;
-            int SecondNumberFibonachi = 1;
-            for (int i = 0; i < StepN; i++)
+            int firstNumberFibonachi = 0;
+            int secondNumberFibonachi = 1;
+            for (int i = 0; i < stepN; i++)
             {
-                int Temp = FirstNumberFibonachi;
-                FirstNumberFibonachi = SecondNumberFibonachi;
-                SecondNumberFibonachi = Temp + SecondNumberFibonachi;
+                int Temp = firstNumberFibonachi;
+                firstNumberFibonachi = secondNumberFibonachi;
+                secondNumberFibonachi = Temp + secondNumberFibonachi;
             }
-            return FirstNumberFibonachi;
+
+            return firstNumberFibonachi;
         }
+
     }
+
 }

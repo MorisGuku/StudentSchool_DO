@@ -4,28 +4,31 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace hw_2_
+namespace hw_2
 {
     internal class ConsoleClr
     {
-        public static void Menu(string MenuText)
+        public static void WriteMenu(string menuText)
         {
             Console.ForegroundColor = System.ConsoleColor.Yellow;
-            Console.WriteLine(MenuText);
+            Console.WriteLine(menuText);
             Console.ResetColor();
         }
-        public static void Errors(string ErrorsText)
+
+        public static void WriteErrors(string errorsText)
         {
             Console.ForegroundColor = System.ConsoleColor.Red;
-            Console.WriteLine(ErrorsText);
+            Console.WriteLine(errorsText);
             Console.ResetColor();
         }
-        public static void Service(string ServiceText)
+
+        public static void WriteService(string serviceText)
         {
             Console.ForegroundColor = System.ConsoleColor.Blue;
-            Console.WriteLine(ServiceText);
+            Console.WriteLine(serviceText);
             Console.ResetColor();
         }
 
     }
+
 }
