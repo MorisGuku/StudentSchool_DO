@@ -14,6 +14,7 @@ namespace hw_2
 {
     public class OfficeRepository
     {
+
         private readonly OfficeDB _dbContext = new();
         public List<DbSalesOffice> GetSalesOfficeEF()
         {

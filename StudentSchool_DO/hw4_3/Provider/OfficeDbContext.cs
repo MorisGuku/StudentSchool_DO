@@ -4,10 +4,10 @@ namespace Provider
 {
     public class OfficeDB : DbContext
     {
+        private const string ConnectionString = @"Server=localhost,1433;Database=HW_3;Trusted_Connection=True;Integrated Security=False;Encrypt=False;User=sa;Password=12345Qq@;TrustServerCertificate=true";
         public DbSet<DbUser> Users { get; set; }
         public DbSet<DbSalesOffice> SalesOffices { get; set; }
         public DbSet<DbCar> Cars { get; set; }
-        private const string ConnectionString = @"Server=localhost,1433;Database=HW_3;Trusted_Connection=True;Integrated Security=False;Encrypt=False;User=sa;Password=12345Qq@;TrustServerCertificate=true";
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(ConnectionString);

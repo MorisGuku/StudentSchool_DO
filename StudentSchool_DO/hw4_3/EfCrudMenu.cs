@@ -26,7 +26,6 @@ public class EfCrudMenu
                     {
                         UsersEfCrudMenu.GetUserEfMenu();
                         return;
-                        
                     }
 
                     case 2:
@@ -45,7 +44,7 @@ public class EfCrudMenu
                     {
                         return;
                     }
-                    
+
                     case 5:
                     {
                         return;
@@ -56,7 +55,7 @@ public class EfCrudMenu
                         Environment.Exit(0);
                         break;
                     }
-                    
+
                 }
 
             break; 
