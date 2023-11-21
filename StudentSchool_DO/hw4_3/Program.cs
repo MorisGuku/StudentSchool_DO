@@ -12,8 +12,9 @@ internal class Program
             ConsoleColorHelper.WriteMenu("\t1 - Read data from file");
             ConsoleColorHelper.WriteMenu("\t2 - Write file by URL");
             ConsoleColorHelper.WriteMenu("\t3 - Show Fibonacci number");
-            ConsoleColorHelper.WriteMenu("\t4 - Work with database");
-            ConsoleColorHelper.WriteMenu("\t5 - Exit");
+            ConsoleColorHelper.WriteMenu("\t4 - Work with SQL database");
+            ConsoleColorHelper.WriteMenu("\t5 - Work with EF database");
+            ConsoleColorHelper.WriteMenu("\t6 - Exit");
             ConsoleColorHelper.WriteMenu("Your choice?");
             var inputMenu = InputConsole.IntInputCheck();
             while (true)
@@ -114,12 +115,15 @@ internal class Program
                         {
                             break;
                         }
-
                     case 4:
-                        EfCrudMenu.GetSqlMenu();
+                        SqlCrudMenu.GetSqlMenu();
+                        break;
+                    
+                    case 5:
+                        EfCrudMenu.GetEfMenu();
                         break;
 
-                    case 5:
+                    case 6:
                         Environment.Exit(0);
                         break;
                 }
@@ -128,18 +132,6 @@ internal class Program
             }
 
         }
-
-
-        // static int IntInputCheck()
-        // {
-        //     int num;
-        //     while (!int.TryParse(Console.ReadLine(), out num))
-        //     {
-        //         ConsoleColorHelper.WriteErrors("Invalid input. Please enter a number:");
-        //     }
-
-        //     return num;
-        // }
 
     }
 

@@ -3,9 +3,9 @@ using Microsoft.Data.SqlClient;
 using System.Net;
 namespace hw_2;
 
-public class EfCrudMenu
+public class SqlCrudMenu
 {
-    public static void GetEfMenu()
+    public static void GetSqlMenu()
     {
         while(true)
         {   
@@ -24,20 +24,20 @@ public class EfCrudMenu
                 {
                     case 1:
                     {
-                        UsersEfCrudMenu.GetUserEfMenu();
+                        UsersSqlCrudMenu.GetUserSqlMenu();
                         return;
                         
                     }
 
                     case 2:
                     {
-                        SalesOfficeEfCrudMenu.GetSalesOfficeEfMenu();
+                        SalesOfficeSqlCrudMenu.GetSalesOfficeSqlMenu();
                         return;
                     }
 
                     case 3:
                     {   
-                        CarEfCrudMenu.GetCarEfMenu();
+                        CarSqlCrudMenu.GetCarSqlMenu();
                         return;
                     }
 
