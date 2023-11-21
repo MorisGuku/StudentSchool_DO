@@ -5,6 +5,7 @@ using System.Reflection.Emit;
 namespace DbModel;
 
 public class DbCar
+
 {
     public Guid Id { get; set; }
     public Guid UserId { get; set; }
@@ -14,4 +15,3 @@ public class DbCar
     public List<DbUser> Users { get; set; } = new();
     public List<DbSalesOffice> SalesOffices { get; set; } = new();
 }
-

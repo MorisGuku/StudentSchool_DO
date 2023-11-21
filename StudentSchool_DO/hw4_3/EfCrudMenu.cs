@@ -6,6 +6,7 @@ namespace hw_2;
 public class EfCrudMenu
 {
     public static void GetEfMenu()
+
     {
         while(true)
         {   
@@ -26,6 +27,7 @@ public class EfCrudMenu
                     {
                         UsersEfCrudMenu.GetUserEfMenu();
                         return;
+
                     }
 
                     case 2:
@@ -55,7 +57,7 @@ public class EfCrudMenu
                         Environment.Exit(0);
                         break;
                     }
-
+                    
                 }
 
             break; 
