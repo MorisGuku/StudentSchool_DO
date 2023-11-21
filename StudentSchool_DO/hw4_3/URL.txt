@@ -1,0 +1,2384 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+<html lang="ru" >
+<head>
+    <title>Postgres Pro Enterprise : Документация: 15: ALTER TABLE : Компания Postgres Professional</title>
+	
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="msapplication-TileColor" content="#2d89ef">
+    <meta name="msapplication-TileImage" content="/img/mstile-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+	<meta name="p:domain_verify" content="26bcf8b79467031bea9a8631dd6f0b11"/>
+	<meta name="google-site-verification" content="Vy_P_vr-Jp6rfy_wQpPSplaU1p3wfEPSwtHOQBFZU7Q" />
+    <meta name="csrf-token" content="">
+
+	<meta property="og:url"             content="https://postgrespro.ru/docs/enterprise/15/sql-altertable" >
+	<meta property="fb:app_id"          content="546521955527856" >
+	<meta property="og:type"            content="website" >
+	<meta property="og:title"       content="Postgres Pro Enterprise : Документация: 15: ALTER TABLE" >
+	<meta property="og:image"       content="https://postgrespro.ru/img/v3/logo2.png" >
+	
+	
+	<link rel="alternate" type="application/rss+xml" title="RSS" href="https://postgrespro.ru/rss">
+	<link rel="apple-touch-icon" sizes="57x57" href="/img/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/img/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/img/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/img/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/img/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/img/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/img/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon-180x180.png">
+    <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="/img/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/img/android-chrome-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/img/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/img/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest"  href="/img/manifest.json">
+    <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+
+	<link rel="stylesheet" href="/j/v3.css/bootstrap.min.css">
+	<link rel="stylesheet" href="/j/v3.css/style_v3.css">
+	<link rel="stylesheet" href="/j/v3.css/hljs.css">
+	<link rel="stylesheet" href="/j/v3.css/docs.css">
+
+	<link rel="stylesheet" href="/lib/j/font-awesome/css/font-awesome.min.css">
+
+	<script src="/j/all.js?1"></script>
+	
+
+
+
+	
+<style>
+.main > section {
+	padding-top: 0;
+}
+
+.doc-list h3 {
+	margin-bottom: 25px;
+}
+
+.doc-nav-versions li > a.disabled { 
+	pointer-events: none;
+	color: #525f62;
+	text-decoration: none;
+}
+.doc-list { list-style: none; color: #343a3d; }
+.doc-list ul { margin: 2px 0 2px -26px }
+.doc-list li { display: inline; padding-right: 4px; }
+.doc-list li.separator { padding-right: 10px; }
+.doc-list a.disabled {
+	color: #343a3d;
+	pointer-events: none;
+}
+.doc-list a::before {
+	position:relative; 
+	left: -2px; 
+	top: 2px; 
+} 
+
+.menu-docs { 
+	font-weight: 500; 
+    margin: 0 auto 0 auto ;
+    
+    padding-top: 3em;
+    padding-bottom: 0;
+    width: 100%;
+}
+.menu-docs a.disabled {
+	pointer-events: none;
+}
+.menu-product-wrapper {
+	margin-bottom: 1em;
+	display: inline-block; text-align: left; padding-left:2em;vertical-align: top;
+}
+.menu-product-wrapper a.active{
+	font-weight: 700;
+}
+.menu-product-wrapper a.active.disabled{
+	color: black !important;
+}
+.dark-theme  .menu-product-wrapper a.active.disabled{
+	color: white !important;
+}
+.menu-versions-wrapper {
+	margin-top: 0.5em;
+}
+
+#toggle-lang input[type="radio"] {
+	position: absolute;clip: 
+	rect(0, 0, 0, 0);
+	pointer-events: none;
+}
+
+.menu-doc-files-group {
+	position: absolute;
+	right: 0;
+	margin-right: 1em; 
+}
+
+.toggle-lang-group {
+	top: 96px; 
+	position:sticky;
+	display: block; 
+	float:right; 
+	margin-top: 42px;
+	
+}
+@media (max-width: 991.98px) {
+	.toggle-lang-group {
+		display: inline-flex;
+		position: absolute;
+		right: 140px;
+		top: -21px;
+		background: white;
+		z-index: 990;
+	}
+	.toggle-lang-group > label {
+		width: 64px;
+		margin-bottom: 0;
+		padding-bottom: 0;
+	}
+	
+	.toggle-lang-group .slider {
+		width: 72px;		
+	}
+}
+nav.menu-docs .btn-group {
+	vertical-align: inherit;
+	
+}
+
+
+.menu-versions-wrapper .btn.unsupported { opacity: 0.4; }
+
+</style>
+
+	
+	
+	<script type="text/javascript">
+		var LANG = 'ru';
+	</script>
+	
+
+</head>
+<body >
+	
+<div class="modal fade" id="loginForm" style="display: none;">
+	<form onSubmit="return false;">
+	<div class="modal-dialog"><div class="modal-content"><div class="modal-header">
+		<h5 class="modal-title">Вход в личный кабинет</h5>
+	</div><div class="modal-body">
+			<input type="text"     required name="email"    class="primary" placeholder="введите e-mail"  >
+			<input type="password" required name="password" class="primary" placeholder="введите пароль">
+	</div>
+	<div class="modal-footer" >
+		<button type="submit" class="btn btn-primary ">Войти</button>
+		<div class="text-center" style="display: block;width: 100%; margin-left:0; margin-top:0.5em;">
+			<button type="button" class="btn btn-psevdo btn-restore float-left">Забыли пароль?</button>
+			<button type="button" class="btn btn-outline-primary btn-reg float-right">Регистрация</button><hr style="clear: both;margin-top:4em;">
+			<button type="button" class="btn btn-outline-success " onClick="document.location.href = '/';">Спасибо, потом</button>
+		</div>
+	</div>
+	</div></div>
+	</form>
+</div>
+
+<div class="modal fade" id="regForm" role="dialog" style="display: none;">
+	<form onSubmit="return false;">
+	<div class="modal-dialog" ><div class="modal-content"><div class="modal-header">
+		<h5 class="modal-title">Регистрация пользователя</h5>
+	</div>
+	<div class="modal-body">		
+		<input type="text"     required name="email"          placeholder="E-mail" >
+		<input type="password" required name="password"       placeholder="Пароль" >
+		<input type="password" required name="passw2"         placeholder="Пароль повторно"  >
+		<input type="text"     required name="last_name_ru"   placeholder="Фамилия">
+		<input type="text"     required name="first_name_ru"  placeholder="Имя"    >
+		<!-- input type="text"              name="middle_name_ru" placeholder="Отчество">
+		<input type="text"              name="phone"          placeholder="Телефон" -->
+		<label><input id="agree" name="agree" type="checkbox"/> Подтверждаю</label>
+	 		<span class="toggler" style="display:inline"  onClick="loadAgreement();">согласие с обработкой персональных данных</span>
+	</div>
+	<div class="modal-footer">
+		<button type="submit" class="btn btn-primary ">Зарегистрироваться</button>
+		<button class="btn btn-psevdo btn-back">назад</button>
+	</div></div></div>
+	</form>
+</div>
+
+<style>
+	.cabinet-modal .modal-dialog{
+		margin: 5em 2em auto auto;
+	}
+	.cabinet-modal .icon-cabinet {
+		display:block;
+		margin:auto;
+		font-size: 2em;
+	}
+</style>
+
+
+<div class="modal fade cabinet-modal" id="cabinet-modal-info" tabindex="-1" role="dialog" aria-labelledby="cabinet-modal-infoLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+         <span class="fa fa-sign-in fa-lg icon-cabinet cabinet-button btn btn-primary xs-none text-center invisible"></span>
+      </div>
+      <div class="modal-body">
+	      <p id="name" class="text-center text-muted"></p>
+	      <p id="e-mail" class="text-center font-weight-light"></p>
+	      <p class="text-center"><a href="/user">Личный кабинет</a></p>
+      </div>
+      <div class="modal-footer" style="width: 85%;margin: auto;">
+	      <button class="text-center btn btn-warning" id="cabinet-action-button" style="width: 100%;" onClick="logout();">Выйти</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div id="warp-agreement" style="z-index: 10000;">
+<div class="pop-up-agreement" style="display: none;z-index: 10000;"  onClick="$(this).slideToggle(150);" >
+<div class="agreement" >
+<div class="pop-up-close">&#10006;</div>
+<div id="agreement">
+</div>
+</div>
+</div>
+</div>
+
+
+
+<div class="modal fade" id="restoreForm" style="display: none;">
+	<form onSubmit="return false;">
+	<div class="modal-dialog" ><div class="modal-content"><div class="modal-header">
+		<h5 class="modal-title">Восстановление пароля</h5>
+	</div>
+	<div class="modal-body">
+		<p>Укажите e-mail, на который будет выслан код восстановления пароля.</p>
+		<input type="text" name="email" required placeholder="введите e-mail">
+	</div>
+	<div class="modal-footer">
+		<button type="submit" class="btn btn-primary ">Продолжить</button>
+		<button type="button" class="btn btn-psevdo btn-back">назад</button>
+	</div></div></div>
+	</form>
+</div>
+
+<div class="modal fade" id="confirmForm" style="display: none;">
+	<form onSubmit="return false;">
+	<div class="modal-dialog" ><div class="modal-content"><div class="modal-header">
+		<h4 class="modal-title">Подтверждение аккаунта</h4>
+	</div>
+	<div class="modal-body">
+		<p>На указанный вами адрес e-mail был выслан код подтверждения аккаунта. Введите полученный код для продолжения:</p>
+		<input type="text" name="key" required placeholder="введите код">
+	</div>
+	<div class="modal-footer">
+		<button type="submit" class="btn btn-primary ">Продолжить</button>
+		<button type="button" class="btn btn-psevdo btn-back">назад</button>
+	</div></div></div>
+	</form>
+</div>
+
+<div class="modal fade" id="newPasswordForm" style="display: none;">
+	<form onSubmit="return false;">
+	<div class="modal-dialog" ><div class="modal-content"><div class="modal-header">
+		<h4 class="modal-title">Изменение пароля</h4>
+	</div><div class="modal-body">
+		<p>Введите новый пароль два раза:</p>
+		<input required type="password" name="password"><br>
+		<input required type="password" name="pass2">
+	</div><div class="modal-footer">
+		<div class="row">
+			<div class="col-sm-12"><button type="submit" class="btn btn-success ">Продолжить</button></div>
+		</div>
+	</div></div></div>
+	</form>
+</div>
+
+	
+	
+		<div id="fb-root"></div>
+		
+		
+		<script src="https://apis.google.com/js/platform.js" async defer>
+		  {lang: 'ru'}
+		</script>
+		
+
+	
+	
+
+	
+    <header>
+	<nav class="navbar navbar-expand-xl navbar-light bg-light justify-content-between">
+		<!-- div class="mr-2">
+			<span class=" d-none d-xl-inline">{XL}</span>
+			<span class=" d-none d-lg-inline d-xl-none">{LG}</span>
+			<span class=" d-none d-md-inline d-lg-none">{MD}</span>
+			<span class=" d-none d-sm-inline d-md-none">{SM}</span>
+			<span class=" d-block d-sm-none">{XS}</span>
+		</div -->
+		
+		<a class="navbar-brand" href="/">
+			<img src="/img/v3/PostgresPro_logo.svg" alt="Postgres Pro" title="Postgres Pro">			
+		</a>
+		
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		  
+		
+		<div class="collapse navbar-collapse" id="navbarNavDropdown">			
+			
+	<ul class="nav navbar-nav float-left">
+		
+			<li class="nav-item dropdown">
+				<a class="nav-link " 
+					href="#" aria-haspopup="false" aria-expanded="true">
+					 Компания
+				</a>				
+				<a class="nav-link dropdown-toggle dropdown-toggle-split" href="#" ></a>
+				
+				<ul class="dropdown-menu  dropright" >
+				
+					<li style="white-space: nowrap; padding: 8px 0 8px 8px;" class="nav-item dropdown 
+					">
+						<a href="/about" class="dropdown-item 
+							" style="display: inline;">О компании</a></li>
+				
+					<li style="white-space: nowrap; padding: 8px 0 8px 8px;" class="nav-item dropdown 
+					">
+						<a href="/about/team" class="dropdown-item 
+							" style="display: inline;">Руководство</a></li>
+				
+					<li style="white-space: nowrap; padding: 8px 0 8px 8px;" class="nav-item dropdown 
+					">
+						<a href="/about/license" class="dropdown-item 
+							" style="display: inline;">Документы</a></li>
+				
+					<li style="white-space: nowrap; padding: 8px 0 8px 8px;" class="nav-item dropdown 
+					">
+						<a href="/partners" class="dropdown-item 
+							" style="display: inline;">Партнёры</a></li>
+				
+					<li style="white-space: nowrap; padding: 8px 0 8px 8px;" class="nav-item dropdown 
+					">
+						<a href="https://career.postgrespro.ru/" class="dropdown-item 
+							" style="display: inline;">Карьера</a></li>
+				
+					<li style="white-space: nowrap; padding: 8px 0 8px 8px;" class="nav-item dropdown 
+					">
+						<a href="/contacts" class="dropdown-item 
+							" style="display: inline;">Контакты</a></li>
+				
+				</ul>
+			</li>
+		
+			<li class="nav-item dropdown">
+				<a class="nav-link " 
+					href="/products/postgrespro" aria-haspopup="false" aria-expanded="true">
+					Продукты
+				</a>				
+				<a class="nav-link dropdown-toggle dropdown-toggle-split" href="#" ></a>
+				
+				<ul class="dropdown-menu  dropright" >
+				
+					<li style="white-space: nowrap; padding: 8px 0 8px 8px;" class="nav-item dropdown 
+					">
+						<a href="/products/postgrespro/enterprise" class="dropdown-item 
+							" style="display: inline;">СУБД POSTGRES PRO ENTERPRISE</a></li>
+				
+					<li style="white-space: nowrap; padding: 8px 0 8px 8px;" class="nav-item dropdown 
+					">
+						<a href="/products/postgrespro/enterprisecertified" class="dropdown-item 
+							" style="display: inline;">СУБД POSTGRES PRO ENTERPRISE CERTIFIED</a></li>
+				
+					<li style="white-space: nowrap; padding: 8px 0 8px 8px;" class="nav-item dropdown 
+					">
+						<a href="/products/postgrespro/certified" class="dropdown-item 
+							" style="display: inline;">СУБД POSTGRES PRO CERTIFIED</a></li>
+				
+					<li style="white-space: nowrap; padding: 8px 0 8px 8px;" class="nav-item dropdown 
+					">
+						<a href="/products/postgrespro/standard" class="dropdown-item 
+							" style="display: inline;">СУБД POSTGRES PRO STANDARD</a></li>
+				
+					<li style="white-space: nowrap; padding: 8px 0 8px 8px;" class="nav-item dropdown 
+					">
+						<a href="/products/PPEM" class="dropdown-item 
+							" style="display: inline;">Postgres Pro Enterprise Manager</a></li>
+				
+					<li style="white-space: nowrap; padding: 8px 0 8px 8px;" class="nav-item dropdown 
+					">
+						<a href="/products/pg_probackup" class="dropdown-item 
+							" style="display: inline;">Postgres Pro Backup Enterprise</a></li>
+				
+					<li style="white-space: nowrap; padding: 8px 0 8px 8px;" class="nav-item dropdown 
+					">
+						<a href="/products/shardman" class="dropdown-item 
+							" style="display: inline;">Postgres Pro Shardman</a></li>
+				
+					<li style="white-space: nowrap; padding: 8px 0 8px 8px;" class="nav-item dropdown 
+					">
+						<a href="/windows" class="dropdown-item 
+							" style="display: inline;">СУБД PostgreSQL для Windows</a></li>
+				
+					<li style="white-space: nowrap; padding: 8px 0 8px 8px;" class="nav-item dropdown 
+					">
+						<a href="/roadmap" class="dropdown-item 
+							" style="display: inline;">План разработок</a></li>
+				
+					<li style="white-space: nowrap; padding: 8px 0 8px 8px;" class="nav-item dropdown 
+					">
+						<a href="/compatible-solutions" class="dropdown-item 
+							" style="display: inline;">Совместимые решения</a></li>
+				
+				</ul>
+			</li>
+		
+			<li class="nav-item dropdown">
+				<a class="nav-link " 
+					href="/services/" aria-haspopup="false" aria-expanded="true">
+					Услуги
+				</a>				
+				<a class="nav-link dropdown-toggle dropdown-toggle-split" href="#" ></a>
+				
+				<ul class="dropdown-menu  dropright" >
+				
+					<li style="white-space: nowrap; padding: 8px 0 8px 8px;" class="nav-item dropdown 
+					">
+						<a href="/services/support" class="dropdown-item 
+							" style="display: inline;">Техподдержка СУБД</a></li>
+				
+					<li style="white-space: nowrap; padding: 8px 0 8px 8px;" class="nav-item dropdown 
+					">
+						<a href="/services/audit" class="dropdown-item 
+							" style="display: inline;">Аудит СУБД</a></li>
+				
+					<li style="white-space: nowrap; padding: 8px 0 8px 8px;" class="nav-item dropdown 
+					">
+						<a href="/services/migration" class="dropdown-item 
+							" style="display: inline;">Миграция СУБД</a></li>
+				
+				</ul>
+			</li>
+		
+			<li class="nav-item dropdown">
+				<a class="nav-link " 
+					href="#" aria-haspopup="false" aria-expanded="true">
+					 Клиенты
+				</a>				
+				<a class="nav-link dropdown-toggle dropdown-toggle-split" href="#" ></a>
+				
+				<ul class="dropdown-menu  dropright" >
+				
+					<li style="white-space: nowrap; padding: 8px 0 8px 8px;" class="nav-item dropdown 
+					">
+						<a href="/trusted" class="dropdown-item 
+							" style="display: inline;">Нам доверяют</a></li>
+				
+					<li style="white-space: nowrap; padding: 8px 0 8px 8px;" class="nav-item dropdown 
+					">
+						<a href="/reviews" class="dropdown-item 
+							" style="display: inline;">Отзывы</a></li>
+				
+				</ul>
+			</li>
+		
+			<li class="nav-item dropdown">
+				<a class="nav-link " 
+					href="/education" aria-haspopup="false" aria-expanded="true">
+					Образование
+				</a>				
+				<a class="nav-link dropdown-toggle dropdown-toggle-split" href="#" ></a>
+				
+				<ul class="dropdown-menu  dropright" >
+				
+					<li style="white-space: nowrap; padding: 8px 0 8px 8px;" class="nav-item dropdown 
+					">
+						<a href="/docs" class="dropdown-item 
+							" style="display: inline;">Документация</a></li>
+				
+					<li style="white-space: nowrap; padding: 8px 0 8px 8px;" class="nav-item dropdown 
+					">
+						<a href="/education/books" class="dropdown-item 
+							" style="display: inline;">Книги</a></li>
+				
+					<li style="white-space: nowrap; padding: 8px 0 8px 8px;" class="nav-item dropdown 
+					dropdown-toggle ">
+						<a href="/education/courses" class="dropdown-item 
+							" style="display: inline;">Учебные курсы</a><ul class="dropdown-submenu" aria-labelledby="navbarDropdownSubMenuLink" style="" ><li class="nav-item " style="white-space: nowrap; padding: 8px 0 8px 8px;" >
+										<a href="/education/courses" class="dropdown-item 
+											">
+										 	Для DBA и разработчиков
+										 </a>
+									 </li><li class="nav-item " style="white-space: nowrap; padding: 8px 0 8px 8px;" >
+										<a href="/education/where" class="dropdown-item 
+											">
+										 	Учебные центры
+										 </a>
+									 </li></ul>
+						</li>
+				
+					<li style="white-space: nowrap; padding: 8px 0 8px 8px;" class="nav-item dropdown 
+					">
+						<a href="/video/how-to" class="dropdown-item 
+							" style="display: inline;">How-to видео</a></li>
+				
+					<li style="white-space: nowrap; padding: 8px 0 8px 8px;" class="nav-item dropdown 
+					">
+						<a href="/education/cert" class="dropdown-item 
+							" style="display: inline;">Сертификация</a></li>
+				
+					<li style="white-space: nowrap; padding: 8px 0 8px 8px;" class="nav-item dropdown 
+					dropdown-toggle ">
+						<a href="/education/university" class="dropdown-item 
+							" style="display: inline;">Курсы для ВУЗов</a><ul class="dropdown-submenu" aria-labelledby="navbarDropdownSubMenuLink" style="" ><li class="nav-item " style="white-space: nowrap; padding: 8px 0 8px 8px;" >
+										<a href="/education/university/dbtech" class="dropdown-item 
+											">
+										 	ОСНОВЫ ТЕХНОЛОГИЙ БАЗ ДАННЫХ 
+										 </a>
+									 </li><li class="nav-item " style="white-space: nowrap; padding: 8px 0 8px 8px;" >
+										<a href="/education/university/sqlprimer" class="dropdown-item 
+											">
+										 	ЯЗЫК SQL
+										 </a>
+									 </li></ul>
+						</li>
+				
+					<li style="white-space: nowrap; padding: 8px 0 8px 8px;" class="nav-item dropdown 
+					dropdown-toggle ">
+						<a href="/education/studens" class="dropdown-item 
+							" style="display: inline;">Студентам</a><ul class="dropdown-submenu" aria-labelledby="navbarDropdownSubMenuLink" style="" ><li class="nav-item " style="white-space: nowrap; padding: 8px 0 8px 8px;" >
+										<a href="https://pgstart.ru" class="dropdown-item 
+											">
+										 	Программа стажировок
+										 </a>
+									 </li><li class="nav-item " style="white-space: nowrap; padding: 8px 0 8px 8px;" >
+										<a href="/blog/news/5970091" class="dropdown-item 
+											">
+										 	Летняя школа
+										 </a>
+									 </li><li class="nav-item " style="white-space: nowrap; padding: 8px 0 8px 8px;" >
+										<a href="/education/code4all" class="dropdown-item 
+											">
+										 	Код для всех
+										 </a>
+									 </li></ul>
+						</li>
+				
+					<li style="white-space: nowrap; padding: 8px 0 8px 8px;" class="nav-item dropdown 
+					">
+						<a href="/education/glossary" class="dropdown-item 
+							" style="display: inline;">Глоссарий</a></li>
+				
+					<li style="white-space: nowrap; padding: 8px 0 8px 8px;" class="nav-item dropdown 
+					">
+						<a href="/education/demodb" class="dropdown-item 
+							" style="display: inline;">Демо-база</a></li>
+				
+					<li style="white-space: nowrap; padding: 8px 0 8px 8px;" class="nav-item dropdown 
+					">
+						<a href="/list" class="dropdown-item 
+							" style="display: inline;">Списки рассылки</a></li>
+				
+				</ul>
+			</li>
+		
+			<li class="nav-item dropdown">
+				<a class="nav-link " 
+					href="/blog" aria-haspopup="false" aria-expanded="true">
+					Новости
+				</a>				
+				<a class="nav-link dropdown-toggle dropdown-toggle-split" href="#" ></a>
+				
+				<ul class="dropdown-menu  dropright" >
+				
+					<li style="white-space: nowrap; padding: 8px 0 8px 8px;" class="nav-item dropdown 
+					">
+						<a href="/blog/media" class="dropdown-item 
+							" style="display: inline;">СМИ  о нас</a></li>
+				
+					<li style="white-space: nowrap; padding: 8px 0 8px 8px;" class="nav-item dropdown 
+					">
+						<a href="/blog/postgresso" class="dropdown-item 
+							" style="display: inline;">Дайджест Postgresso</a></li>
+				
+					<li style="white-space: nowrap; padding: 8px 0 8px 8px;" class="nav-item dropdown 
+					">
+						<a href="/blog/events" class="dropdown-item 
+							" style="display: inline;">Мероприятия</a></li>
+				
+					<li style="white-space: nowrap; padding: 8px 0 8px 8px;" class="nav-item dropdown 
+					">
+						<a href="/blog/technical" class="dropdown-item 
+							" style="display: inline;">Технические анонсы</a></li>
+				
+					<li style="white-space: nowrap; padding: 8px 0 8px 8px;" class="nav-item dropdown 
+					">
+						<a href="/about/press" class="dropdown-item 
+							" style="display: inline;">Для СМИ</a></li>
+				
+				</ul>
+			</li>
+		
+	</ul>
+	
+<script type="text/template" id="menu-tmpl">
+</script>
+		<ul class="navbar-nav d-xl-none" style="display: inline-block; float: right;">
+			<li class="nav-item " style="display: inline-block !important; padding-right: 1em;"><a href="/search" class="nav-item nav-link icon-search text-primary"></a></li>
+			
+			<li class="nav-item "       style="display: inline-block !important;"><a class="nav-item nav-link " href="#">RU</a></li>
+			<li class="nav-item active" style="display: inline-block !important;"><a class="nav-item nav-link active" href="https://postgrespro.com/docs/enterprise/15/sql-altertable">EN</a></li>
+			
+			<div style="display: inline-block;">
+				
+<style>
+	.account-menu { 
+		display: inline-block; 
+		white-space: nowrap;
+	}
+	.cabinet-button  {
+		margin: 0 0 0 1em;
+		padding: 0.5em 0.5em;
+		border-radius: 50%;		
+	}
+	.cabinet-info {
+		font-weight: 700;
+		cursor: pointer;		
+	}
+	.cabinet-info:hover {
+		color: green;		
+	}
+</style>
+	<li class="nav-item ">
+		<div class="account-menu" data-action="info" id="cabinet-buttons" >
+			<a class="fa fa-sign-in  fa-lg btn btn-primary cabinet-button invisible" onClick="showLoginLogout(this); return false;" href="/user" title="Личный кабинет"></a>
+			<span class="nav-item cabinet-info invisible" onClick="return showAccountInfo();"  title="Дополнительно…">⋮</span>
+		</div>
+	</li>
+
+			</div>
+		</ul>
+	
+
+
+		</div>
+
+		
+<script type="text/template" id="menu-tmpl">
+</script>
+	<div class=" d-none d-xl-flex">
+		<ul class="navbar-nav float-right">
+			<li id="li-search"><a class="nav-item nav-link icon-search text-primary" id="search-button" data-action="null" style="font-size: 1.6em;top: -6px;position: relative;" onClick="showSearch(this);"></a></li>
+			
+			<li class="nav-item "><a class="nav-item nav-link " href="#">RU</a></li>
+			<li class="nav-item active"><a class="nav-item nav-link active" href="https://postgrespro.com/docs/enterprise/15/sql-altertable">EN</a></li>
+			
+			
+<style>
+	.account-menu { 
+		display: inline-block; 
+		white-space: nowrap;
+	}
+	.cabinet-button  {
+		margin: 0 0 0 1em;
+		padding: 0.5em 0.5em;
+		border-radius: 50%;		
+	}
+	.cabinet-info {
+		font-weight: 700;
+		cursor: pointer;		
+	}
+	.cabinet-info:hover {
+		color: green;		
+	}
+</style>
+	<li class="nav-item ">
+		<div class="account-menu" data-action="info" id="cabinet-buttons" >
+			<a class="fa fa-sign-in  fa-lg btn btn-primary cabinet-button invisible" onClick="showLoginLogout(this); return false;" href="/user" title="Личный кабинет"></a>
+			<span class="nav-item cabinet-info invisible" onClick="return showAccountInfo();"  title="Дополнительно…">⋮</span>
+		</div>
+	</li>
+
+		</ul>
+	</div>
+	
+
+		
+	</nav>
+    </header>
+    
+    <main name="main">
+    <div class="main" name="main">
+		
+
+<script>
+$(function() {
+	if ("" != "")
+		toggleLang('', 'enterprise', '15', 'sql-altertable');
+		
+	$('div.sect2').each(function(i,r){
+		var _id = $(r).attr('id');
+		if (_id !== undefined) {
+			if ($(r).find('h3:first').length > 0) {
+				$(r).html('<a href="#'+_id+'" class="autolink"></a>'+$(r).html());
+			}
+		} 
+	});		
+	
+	$('dt').each(function(i,r){
+		var _id = $(r).attr('id');
+		if (_id !== undefined) {
+			$(r).html('<a href="#'+_id+'" class="autolink"></a>'+$(r).html());
+		}
+	});		
+
+// "Тёмная тема"		
+/*	let isDarkTheme = localStorage.getItem("pg_isDarkTheme");
+	var fs = $('#dark-theme').data('target');
+	if (fs) {
+		if (isDarkTheme === 'dark') {
+			$(fs).addClass('dark-theme');
+		} else{
+			$(fs).removeClass('dark-theme');
+		} 
+	}
+	$('#dark-theme').prop('checked', isDarkTheme === 'dark');
+*/
+
+	$('#dark-theme').change(function(e,r) {
+		var t = $($(this).data('content'));
+		t.addClass('transition'); 
+		var fs = $($(this).data('target'));
+		if ($(this).prop('checked')) {
+			fs.addClass('dark-theme');
+//			localStorage.setItem("pg_isDarkTheme", "dark");
+			document.cookie = "css_theme=dark;max-age=604800;samesite=strict";			
+		}
+		else {
+			fs.removeClass('dark-theme');
+//			localStorage.setItem("pg_isDarkTheme", "");
+			document.cookie = "css_theme=;max-age=604800;samesite=strict";			
+		}
+	});
+			
+})
+</script>
+
+
+<nav class="menu-docs text-center">
+	<div  class="--d-none --d-sm-inline" style="float: right;">
+		
+			<div id="menu-doc-files" class="menu-doc-files-group d-none d-xl-inline" >
+				
+					<a href="http://repo.postgrespro.ru/doc//pgproee/15.4.3/ru/postgres.epub" class="epub btn btn-outline-primary" title="epub"></a><br>
+				
+					<a href="http://repo.postgrespro.ru/doc//pgproee/15.4.3/ru/postgres-A4.pdf" class="pdf btn btn-outline-primary" title="pdf"></a><br>
+				
+			</div>
+		
+	
+	</div>
+	
+	
+		
+	<div class="doc-menu-wrapper doc-menu-wrapper-ru  ">
+	
+		
+			<div class="menu-product-wrapper">
+				<a  href="/docs/postgrespro" >Postgres Pro Standard</a><br>
+		
+				<div class="menu-versions-wrapper btn-group" >
+		    	
+					
+						<a href=
+							
+								"/docs/postgrespro/16/sql-altertable" 
+							 
+							class=" btn btn-outline-primary "
+							>
+							16										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/postgrespro/15/sql-altertable" 
+							 
+							class=" btn btn-outline-primary "
+							>
+							15										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/postgrespro/14/sql-altertable" 
+							 
+							class=" btn btn-outline-primary "
+							>
+							14										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/postgrespro/13/sql-altertable" 
+							 
+							class=" btn btn-outline-primary "
+							>
+							13										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/postgrespro/12/sql-altertable" 
+							 
+							class=" btn btn-outline-primary "
+							>
+							12										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/postgrespro/11/sql-altertable" 
+							 
+							class=" btn btn-outline-primary unsupported"
+							title="не поддерживается">
+							11										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/postgrespro/10/sql-altertable" 
+							 
+							class=" btn btn-outline-primary unsupported"
+							title="не поддерживается">
+							10										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/postgrespro/9.6/sql-altertable" 
+							 
+							class=" btn btn-outline-primary unsupported"
+							title="не поддерживается">
+							9.6										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/postgrespro/9.5/sql-altertable" 
+							 
+							class=" btn btn-outline-primary unsupported"
+							title="не поддерживается">
+							9.5										
+						</a>	
+					    	
+		    	
+				</div>
+			</div>
+		
+	
+		
+			<div class="menu-product-wrapper">
+				<a  href="/docs/enterprise" class="active" style="font-weight: 700;">Postgres Pro Enterprise</a><br>
+		
+				<div class="menu-versions-wrapper btn-group" >
+		    	
+					
+						<a href=
+							
+								"/docs/enterprise/15/sql-altertable" 
+							 
+							class="disabled active btn btn-outline-primary "
+							>
+							15										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/enterprise/14/sql-altertable" 
+							 
+							class=" btn btn-outline-primary "
+							>
+							14										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/enterprise/13/sql-altertable" 
+							 
+							class=" btn btn-outline-primary "
+							>
+							13										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/enterprise/12/sql-altertable" 
+							 
+							class=" btn btn-outline-primary "
+							>
+							12										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/enterprise/11/sql-altertable" 
+							 
+							class=" btn btn-outline-primary unsupported"
+							title="не поддерживается">
+							11										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/enterprise/10/sql-altertable" 
+							 
+							class=" btn btn-outline-primary unsupported"
+							title="не поддерживается">
+							10										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/enterprise/9.6/sql-altertable" 
+							 
+							class=" btn btn-outline-primary unsupported"
+							title="не поддерживается">
+							9.6										
+						</a>	
+					    	
+		    	
+				</div>
+			</div>
+		
+	
+		
+			<div class="menu-product-wrapper">
+				<a  href="/docs/postgresql" >PostgreSQL</a><br>
+		
+				<div class="menu-versions-wrapper btn-group" >
+		    	
+					
+						<a href=
+							
+								"/docs/postgresql/16/sql-altertable" 
+							 
+							class=" btn btn-outline-primary "
+							>
+							16										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/postgresql/15/sql-altertable" 
+							 
+							class=" btn btn-outline-primary "
+							>
+							15										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/postgresql/14/sql-altertable" 
+							 
+							class=" btn btn-outline-primary "
+							>
+							14										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/postgresql/13/sql-altertable" 
+							 
+							class=" btn btn-outline-primary "
+							>
+							13										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/postgresql/12/sql-altertable" 
+							 
+							class=" btn btn-outline-primary "
+							>
+							12										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/postgresql/11/sql-altertable" 
+							 
+							class=" btn btn-outline-primary unsupported"
+							title="не поддерживается">
+							11										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/postgresql/10/sql-altertable" 
+							 
+							class=" btn btn-outline-primary unsupported"
+							title="не поддерживается">
+							10										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/postgresql/9.6/sql-altertable" 
+							 
+							class=" btn btn-outline-primary unsupported"
+							title="не поддерживается">
+							9.6										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/postgresql/9.5/sql-altertable" 
+							 
+							class=" btn btn-outline-primary unsupported"
+							title="не поддерживается">
+							9.5										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/postgresql/9.4/sql-altertable" 
+							 
+							class=" btn btn-outline-primary unsupported"
+							title="не поддерживается">
+							9.4										
+						</a>	
+					    	
+		    	
+				</div>
+			</div>
+		
+		
+	</div>
+
+		
+	<div class="doc-menu-wrapper doc-menu-wrapper-en  d-none">
+	
+		
+			<div class="menu-product-wrapper">
+				<a  href="/docs/postgrespro" >Postgres Pro Standard</a><br>
+		
+				<div class="menu-versions-wrapper btn-group" >
+		    	
+					
+						<a href=
+							
+								"/docs/postgrespro/16/sql-altertable?lang=en"
+							 
+							class=" btn btn-outline-primary "
+							>
+							16										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/postgrespro/15/sql-altertable?lang=en"
+							 
+							class=" btn btn-outline-primary "
+							>
+							15										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/postgrespro/14/sql-altertable?lang=en"
+							 
+							class=" btn btn-outline-primary "
+							>
+							14										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/postgrespro/13/sql-altertable?lang=en"
+							 
+							class=" btn btn-outline-primary "
+							>
+							13										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/postgrespro/12/sql-altertable?lang=en"
+							 
+							class=" btn btn-outline-primary "
+							>
+							12										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/postgrespro/11/sql-altertable?lang=en"
+							 
+							class=" btn btn-outline-primary unsupported"
+							title="не поддерживается">
+							11										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/postgrespro/10/sql-altertable?lang=en"
+							 
+							class=" btn btn-outline-primary unsupported"
+							title="не поддерживается">
+							10										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/postgrespro/9.6/sql-altertable?lang=en"
+							 
+							class=" btn btn-outline-primary unsupported"
+							title="не поддерживается">
+							9.6										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/postgrespro/9.5/sql-altertable?lang=en"
+							 
+							class=" btn btn-outline-primary unsupported"
+							title="не поддерживается">
+							9.5										
+						</a>	
+					    	
+		    	
+				</div>
+			</div>
+		
+	
+		
+			<div class="menu-product-wrapper">
+				<a  href="/docs/enterprise" class="active" style="font-weight: 700;">Postgres Pro Enterprise</a><br>
+		
+				<div class="menu-versions-wrapper btn-group" >
+		    	
+					
+						<a href=
+							
+								"/docs/enterprise/15/sql-altertable?lang=en"
+							 
+							class="disabled active btn btn-outline-primary "
+							>
+							15										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/enterprise/14/sql-altertable?lang=en"
+							 
+							class=" btn btn-outline-primary "
+							>
+							14										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/enterprise/13/sql-altertable?lang=en"
+							 
+							class=" btn btn-outline-primary "
+							>
+							13										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/enterprise/12/sql-altertable?lang=en"
+							 
+							class=" btn btn-outline-primary "
+							>
+							12										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/enterprise/11/sql-altertable?lang=en"
+							 
+							class=" btn btn-outline-primary unsupported"
+							title="не поддерживается">
+							11										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/enterprise/10/sql-altertable?lang=en"
+							 
+							class=" btn btn-outline-primary unsupported"
+							title="не поддерживается">
+							10										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/enterprise/9.6/sql-altertable?lang=en"
+							 
+							class=" btn btn-outline-primary unsupported"
+							title="не поддерживается">
+							9.6										
+						</a>	
+					    	
+		    	
+				</div>
+			</div>
+		
+	
+		
+			<div class="menu-product-wrapper">
+				<a  href="/docs/postgresql" >PostgreSQL</a><br>
+		
+				<div class="menu-versions-wrapper btn-group" >
+		    	
+					
+						<a href=
+							
+								"/docs/postgresql/16/sql-altertable?lang=en"
+							 
+							class=" btn btn-outline-primary "
+							>
+							16										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/postgresql/15/sql-altertable?lang=en"
+							 
+							class=" btn btn-outline-primary "
+							>
+							15										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/postgresql/14/sql-altertable?lang=en"
+							 
+							class=" btn btn-outline-primary "
+							>
+							14										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/postgresql/13/sql-altertable?lang=en"
+							 
+							class=" btn btn-outline-primary "
+							>
+							13										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/postgresql/12/sql-altertable?lang=en"
+							 
+							class=" btn btn-outline-primary "
+							>
+							12										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/postgresql/11/sql-altertable?lang=en"
+							 
+							class=" btn btn-outline-primary unsupported"
+							title="не поддерживается">
+							11										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/postgresql/10/sql-altertable?lang=en"
+							 
+							class=" btn btn-outline-primary unsupported"
+							title="не поддерживается">
+							10										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/postgresql/9.6/sql-altertable?lang=en"
+							 
+							class=" btn btn-outline-primary unsupported"
+							title="не поддерживается">
+							9.6										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/postgresql/9.5/sql-altertable?lang=en"
+							 
+							class=" btn btn-outline-primary unsupported"
+							title="не поддерживается">
+							9.5										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/postgresql/9.4/sql-altertable?lang=en"
+							 
+							class=" btn btn-outline-primary unsupported"
+							title="не поддерживается">
+							9.4										
+						</a>	
+					    	
+		    	
+				</div>
+			</div>
+		
+		
+	</div>
+
+		
+	<div class="doc-menu-wrapper doc-menu-wrapper-ru-en  d-none">
+	
+		
+			<div class="menu-product-wrapper">
+				<a  href="/docs/postgrespro" >Postgres Pro Standard</a><br>
+		
+				<div class="menu-versions-wrapper btn-group" >
+		    	
+					
+						<a href=
+							
+								"/docs/postgrespro/16/sql-altertable?lang=ru-en"
+							 
+							class=" btn btn-outline-primary "
+							>
+							16										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/postgrespro/15/sql-altertable?lang=ru-en"
+							 
+							class=" btn btn-outline-primary "
+							>
+							15										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/postgrespro/14/sql-altertable?lang=ru-en"
+							 
+							class=" btn btn-outline-primary "
+							>
+							14										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/postgrespro/13/sql-altertable?lang=ru-en"
+							 
+							class=" btn btn-outline-primary "
+							>
+							13										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/postgrespro/12/sql-altertable?lang=ru-en"
+							 
+							class=" btn btn-outline-primary "
+							>
+							12										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/postgrespro/11/sql-altertable?lang=ru-en"
+							 
+							class=" btn btn-outline-primary unsupported"
+							title="не поддерживается">
+							11										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/postgrespro/10/sql-altertable?lang=ru-en"
+							 
+							class=" btn btn-outline-primary unsupported"
+							title="не поддерживается">
+							10										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/postgrespro/9.6/sql-altertable?lang=ru-en"
+							 
+							class=" btn btn-outline-primary unsupported"
+							title="не поддерживается">
+							9.6										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/postgrespro/9.5/sql-altertable?lang=ru-en"
+							 
+							class=" btn btn-outline-primary unsupported"
+							title="не поддерживается">
+							9.5										
+						</a>	
+					    	
+		    	
+				</div>
+			</div>
+		
+	
+		
+			<div class="menu-product-wrapper">
+				<a  href="/docs/enterprise" class="active" style="font-weight: 700;">Postgres Pro Enterprise</a><br>
+		
+				<div class="menu-versions-wrapper btn-group" >
+		    	
+					
+						<a href=
+							
+								"/docs/enterprise/15/sql-altertable?lang=ru-en"
+							 
+							class="disabled active btn btn-outline-primary "
+							>
+							15										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/enterprise/14/sql-altertable?lang=ru-en"
+							 
+							class=" btn btn-outline-primary "
+							>
+							14										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/enterprise/13/sql-altertable?lang=ru-en"
+							 
+							class=" btn btn-outline-primary "
+							>
+							13										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/enterprise/12/sql-altertable?lang=ru-en"
+							 
+							class=" btn btn-outline-primary "
+							>
+							12										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/enterprise/11/sql-altertable?lang=ru-en"
+							 
+							class=" btn btn-outline-primary unsupported"
+							title="не поддерживается">
+							11										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/enterprise/10/sql-altertable?lang=ru-en"
+							 
+							class=" btn btn-outline-primary unsupported"
+							title="не поддерживается">
+							10										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/enterprise/9.6/sql-altertable?lang=ru-en"
+							 
+							class=" btn btn-outline-primary unsupported"
+							title="не поддерживается">
+							9.6										
+						</a>	
+					    	
+		    	
+				</div>
+			</div>
+		
+	
+		
+			<div class="menu-product-wrapper">
+				<a  href="/docs/postgresql" >PostgreSQL</a><br>
+		
+				<div class="menu-versions-wrapper btn-group" >
+		    	
+					
+						<a href=
+							
+								"/docs/postgresql/16/sql-altertable?lang=ru-en"
+							 
+							class=" btn btn-outline-primary "
+							>
+							16										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/postgresql/15/sql-altertable?lang=ru-en"
+							 
+							class=" btn btn-outline-primary "
+							>
+							15										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/postgresql/14/sql-altertable?lang=ru-en"
+							 
+							class=" btn btn-outline-primary "
+							>
+							14										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/postgresql/13/sql-altertable?lang=ru-en"
+							 
+							class=" btn btn-outline-primary "
+							>
+							13										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/postgresql/12/sql-altertable?lang=ru-en"
+							 
+							class=" btn btn-outline-primary "
+							>
+							12										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/postgresql/11/sql-altertable?lang=ru-en"
+							 
+							class=" btn btn-outline-primary unsupported"
+							title="не поддерживается">
+							11										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/postgresql/10/sql-altertable?lang=ru-en"
+							 
+							class=" btn btn-outline-primary unsupported"
+							title="не поддерживается">
+							10										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/postgresql/9.6/sql-altertable?lang=ru-en"
+							 
+							class=" btn btn-outline-primary unsupported"
+							title="не поддерживается">
+							9.6										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/postgresql/9.5/sql-altertable?lang=ru-en"
+							 
+							class=" btn btn-outline-primary unsupported"
+							title="не поддерживается">
+							9.5										
+						</a>	
+					    	
+		    	
+					
+						<a href=
+							
+								"/docs/postgresql/9.4/sql-altertable?lang=ru-en"
+							 
+							class=" btn btn-outline-primary unsupported"
+							title="не поддерживается">
+							9.4										
+						</a>	
+					    	
+		    	
+				</div>
+			</div>
+		
+		
+	</div>
+
+
+	
+
+</nav>
+
+				
+<section class="container-fluid">
+		<div id="toggle-lang" class="btn-group toggle-lang-group">
+			<label class="btn btn-outline-success active" name="ru" style="cursor: pointer; margin: 0; width: 100%;">
+				<input type="radio" autocomplete="off" name="ru" value="ru" checked onChange="toggleLang(this.value, 'enterprise', '15', 'sql-altertable'); return false;"> RU
+			</label><br>
+			<label class="btn btn-outline-success" name="en" style="cursor: pointer; margin: 0; width: 100%;">
+				<input type="radio" autocomplete="off" name="en" value="en"  onChange="toggleLang(this.value, 'enterprise', '15', 'sql-altertable'); return false;"> EN
+			</label><br>
+			<label class="btn btn-outline-success d-none d-sm-inline-block" name="ru-en" style="cursor: pointer; margin: 0; width: 100%;">
+				<input type="radio" autocomplete="off" name="ru-en" value="ru-en" onChange="toggleLang(this.value, 'enterprise', '15', 'sql-altertable'); return false;" > RU EN
+			</label>
+
+			<label class="switch">
+			   <input type="checkbox" id="dark-theme" data-target="html" data-content="body" >
+			   <span class="slider"></span>
+			</label>		
+
+		</div>
+<div class="container">
+<div class="row docs content" id="docContent-wrapper-ppg">
+    <div class="col-md-12" id="divDocRu">
+    	
+			<div class="container-fluid col-10" id="docContent"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="5">ALTER TABLE</th></tr><tr><td align="left" width="10%"><a accesskey="p" href="sql-altersystem" title="ALTER SYSTEM">Пред.</a> </td><td align="left" width="10%"><a accesskey="u" href="sql-commands" title="Команды SQL">Наверх</a></td><th align="center" width="60%">Команды SQL</th><td align="right" width="10%"><a accesskey="h" href="index" title="Документация к Postgres Pro Enterprise 15.4.3">Начало</a></td><td align="right" width="10%"> <a accesskey="n" href="sql-altertablespace" title="ALTER TABLESPACE">След.</a></td></tr></table><hr /></div><div class="refentry" id="SQL-ALTERTABLE"><div class="titlepage"></div><a class="indexterm" id="id-1.9.3.36.1"></a><div class="refnamediv"><h2><span class="refentrytitle">ALTER TABLE</span></h2><p>ALTER TABLE — изменить определение таблицы</div><div class="refsynopsisdiv"><h2>Синтаксис</h2><pre class="synopsis">ALTER TABLE [ IF EXISTS ] [ ONLY ] <em class="replaceable"><code>имя</code></em> [ * ]
+    <em class="replaceable"><code>действие</code></em> [, ... ]
+ALTER TABLE [ IF EXISTS ] [ ONLY ] <em class="replaceable"><code>имя</code></em> [ * ]
+    RENAME [ COLUMN ] <em class="replaceable"><code>имя_столбца</code></em> TO <em class="replaceable"><code>новое_имя_столбца</code></em>
+ALTER TABLE [ IF EXISTS ] [ ONLY ] <em class="replaceable"><code>имя</code></em> [ * ]
+    RENAME CONSTRAINT <em class="replaceable"><code>имя_ограничения</code></em> TO <em class="replaceable"><code>имя_нового_ограничения</code></em>
+ALTER TABLE [ IF EXISTS ] <em class="replaceable"><code>имя</code></em>
+    RENAME TO <em class="replaceable"><code>новое_имя</code></em>
+ALTER TABLE [ IF EXISTS ] <em class="replaceable"><code>имя</code></em>
+    SET SCHEMA <em class="replaceable"><code>новая_схема</code></em>
+ALTER TABLE ALL IN TABLESPACE <em class="replaceable"><code>имя</code></em> [ OWNED BY <em class="replaceable"><code>имя_роли</code></em> [, ... ] ]
+    SET TABLESPACE <em class="replaceable"><code>новое_табл_пространство</code></em> [ NOWAIT ]
+ALTER TABLE [ IF EXISTS ] <em class="replaceable"><code>имя</code></em>
+    ATTACH PARTITION <em class="replaceable"><code>имя_секции</code></em> { FOR VALUES <em class="replaceable"><code>указание_границ_секции</code></em> | DEFAULT }
+ALTER TABLE [ IF EXISTS ] <em class="replaceable"><code>имя</code></em>
+    DETACH PARTITION <em class="replaceable"><code>имя_секции</code></em> [ CONCURRENTLY | FINALIZE ]
+ALTER TABLE [ IF EXISTS ] <em class="replaceable"><code>имя</code></em>
+    <em class="replaceable"><code>действие_pg_pathman</code></em>
+
+<span class="phrase">Где <em class="replaceable"><code>действие</code></em> может быть следующим:</span>
+
+    ADD [ COLUMN ] [ IF NOT EXISTS ] <em class="replaceable"><code>имя_столбца</code></em> <em class="replaceable"><code>тип_данных</code></em> [ COLLATE <em class="replaceable"><code>правило_сортировки</code></em> ] [ <em class="replaceable"><code>ограничение_столбца</code></em> [ ... ] ]
+    DROP [ COLUMN ] [ IF EXISTS ] <em class="replaceable"><code>имя_столбца</code></em> [ RESTRICT | CASCADE ]
+    ALTER [ COLUMN ] <em class="replaceable"><code>имя_столбца</code></em> [ SET DATA ] TYPE <em class="replaceable"><code>тип_данных</code></em> [ COLLATE <em class="replaceable"><code>правило_сортировки</code></em> ] [ USING <em class="replaceable"><code>выражение</code></em> ]
+    ALTER [ COLUMN ] <em class="replaceable"><code>имя_столбца</code></em> SET DEFAULT <em class="replaceable"><code>выражение</code></em>
+    ALTER [ COLUMN ] <em class="replaceable"><code>имя_столбца</code></em> DROP DEFAULT
+    ALTER [ COLUMN ] <em class="replaceable"><code>имя_столбца</code></em> { SET | DROP } NOT NULL
+    ALTER [ COLUMN ] <em class="replaceable"><code>имя_столбца</code></em> DROP EXPRESSION [ IF EXISTS ]
+    ALTER [ COLUMN ] <em class="replaceable"><code>имя_столбца</code></em> ADD GENERATED { ALWAYS | BY DEFAULT } AS IDENTITY [ ( <em class="replaceable"><code>параметры_последовательности</code></em> ) ]
+    ALTER [ COLUMN ] <em class="replaceable"><code>имя_столбца</code></em> { SET GENERATED { ALWAYS | BY DEFAULT } | SET <em class="replaceable"><code>параметр_последовательности</code></em> | RESTART [ [ WITH ] <em class="replaceable"><code>перезапуск</code></em> ] } [...]
+    ALTER [ COLUMN ] <em class="replaceable"><code>имя_столбца</code></em> DROP IDENTITY [ IF EXISTS ]
+    ALTER [ COLUMN ] <em class="replaceable"><code>имя_столбца</code></em> SET STATISTICS <em class="replaceable"><code>integer</code></em>
+    ALTER [ COLUMN ] <em class="replaceable"><code>имя_столбца</code></em> SET ( <em class="replaceable"><code>атрибут</code></em> = <em class="replaceable"><code>значение</code></em> [, ... ] )
+    ALTER [ COLUMN ] <em class="replaceable"><code>имя_столбца</code></em> RESET ( <em class="replaceable"><code>атрибут</code></em> [, ... ] )
+    ALTER [ COLUMN ] <em class="replaceable"><code>имя_столбца</code></em> SET STORAGE { PLAIN | EXTERNAL | EXTENDED | MAIN }
+    ALTER [ COLUMN ] <em class="replaceable"><code>имя_столбца</code></em> SET COMPRESSION <em class="replaceable"><code>метод_сжатия</code></em>
+    ADD <em class="replaceable"><code>ограничение_таблицы</code></em> [ NOT VALID ]
+    ADD <em class="replaceable"><code>ограничение_таблицы_по_индексу</code></em>
+    ALTER CONSTRAINT <em class="replaceable"><code>имя_ограничения</code></em> [ DEFERRABLE | NOT DEFERRABLE ] [ INITIALLY DEFERRED | INITIALLY IMMEDIATE ]
+    VALIDATE CONSTRAINT <em class="replaceable"><code>имя_ограничения</code></em>
+    DROP CONSTRAINT [ IF EXISTS ]  <em class="replaceable"><code>имя_ограничения</code></em> [ RESTRICT | CASCADE ]
+    DISABLE TRIGGER [ <em class="replaceable"><code>имя_триггера</code></em> | ALL | USER ]
+    ENABLE TRIGGER [ <em class="replaceable"><code>имя_триггера</code></em> | ALL | USER ]
+    ENABLE REPLICA TRIGGER <em class="replaceable"><code>имя_триггера</code></em>
+    ENABLE ALWAYS TRIGGER <em class="replaceable"><code>имя_триггера</code></em>
+    DISABLE RULE <em class="replaceable"><code>имя_правила_перезаписи</code></em>
+    ENABLE RULE <em class="replaceable"><code>имя_правила_перезаписи</code></em>
+    ENABLE REPLICA RULE <em class="replaceable"><code>имя_правила_перезаписи</code></em>
+    ENABLE ALWAYS RULE <em class="replaceable"><code>имя_правила_перезаписи</code></em>
+    DISABLE ROW LEVEL SECURITY
+    ENABLE ROW LEVEL SECURITY
+    FORCE ROW LEVEL SECURITY
+    NO FORCE ROW LEVEL SECURITY
+    CLUSTER ON <em class="replaceable"><code>имя_индекса</code></em>
+    SET WITHOUT CLUSTER
+    SET WITHOUT OIDS
+    SET ACCESS METHOD <em class="replaceable"><code>новый_метод_доступа</code></em>
+    SET TABLESPACE <em class="replaceable"><code>новое_табл_пространство</code></em>
+    SET { LOGGED | UNLOGGED }
+    SET CONSTANT
+    SET ( <em class="replaceable"><code>параметр_хранения</code></em> [= <em class="replaceable"><code>значение</code></em>] [, ... ] )
+    RESET ( <em class="replaceable"><code>параметр_хранения</code></em> [, ... ] )
+    INHERIT <em class="replaceable"><code>таблица_родитель</code></em>
+    NO INHERIT <em class="replaceable"><code>таблица_родитель</code></em>
+    OF <em class="replaceable"><code>имя_типа</code></em>
+    NOT OF
+    OWNER TO { <em class="replaceable"><code>новый_владелец</code></em> | CURRENT_ROLE | CURRENT_USER | SESSION_USER }
+    REPLICA IDENTITY { DEFAULT | USING INDEX <em class="replaceable"><code>имя_индекса</code></em> | FULL | NOTHING }
+
+<span class="phrase">и <em class="replaceable"><code>указание_границ_секции</code></em>:</span>
+
+IN ( <em class="replaceable"><code>выражение_границ_секции</code></em> [, ...] ) |
+FROM ( { <em class="replaceable"><code>выражение_границ_секции</code></em> | MINVALUE | MAXVALUE } [, ...] )
+  TO ( { <em class="replaceable"><code>выражение_границ_секции</code></em> | MINVALUE | MAXVALUE } [, ...] ) |
+WITH ( MODULUS <em class="replaceable"><code>числовая_константа</code></em>, REMAINDER <em class="replaceable"><code>числовая_константа</code></em> )
+
+<span class="phrase">здесь <em class="replaceable"><code>действие_pg_pathman</code></em>:</span>
+
+    PARTITION BY HASH ( <em class="replaceable"><code>ключ_разбиения</code></em> ) PARTITIONS ( <em class="replaceable"><code>число_секций</code></em> ) [ CONCURRENTLY ]
+    PARTITION BY RANGE ( <em class="replaceable"><code>ключ_разбиения</code></em> ) START FROM ( <em class="replaceable"><code>начальное_значение</code></em> ) INTERVAL ( <em class="replaceable"><code>значение</code></em> ) [ CONCURRENTLY ]
+    ADD PARTITION <em class="replaceable"><code>имя_секции</code></em> VALUES LESS THAN ( <em class="replaceable"><code>значение</code></em> ) [ TABLESPACE <em class="replaceable"><code>табл_пространство</code></em> ]
+    DROP PARTITION <em class="replaceable"><code>имя_секции</code></em>
+    MERGE PARTITIONS <em class="replaceable"><code>имя_секции</code></em> [, ... ] INTO PARTITION <em class="replaceable"><code>имя_секции</code></em> [ TABLESPACE <em class="replaceable"><code>табл_пространство</code></em> ]
+    MOVE PARTITION <em class="replaceable"><code>имя_секции</code></em> [ TABLESPACE <em class="replaceable"><code>табл_пространство</code></em> ]
+    RENAME PARTITION <em class="replaceable"><code>имя_секции</code></em> TO <em class="replaceable"><code>новое_имя_секции</code></em>
+    SET INTERVAL ( <em class="replaceable"><code>значение</code></em> )
+    SPLIT PARTITION <em class="replaceable"><code>имя_секции</code></em> AT ( <em class="replaceable"><code>значение</code></em> ) [ INTO ( PARTITION <em class="replaceable"><code>левая_секция</code></em> [ TABLESPACE <em class="replaceable"><code>табл_пространство1</code></em> ], PARTITION <em class="replaceable"><code>правая_секция</code></em> [ TABLESPACE <em class="replaceable"><code>табл_пространство2</code></em> ] ) ]
+
+<span class="phrase">и <em class="replaceable"><code>ограничение_столбца</code></em>:</span>
+
+[ CONSTRAINT <em class="replaceable"><code>имя_ограничения</code></em> ]
+{ NOT NULL |
+  NULL |
+  CHECK ( <em class="replaceable"><code>выражение</code></em> ) [ NO INHERIT ] |
+  DEFAULT <em class="replaceable"><code>выражение_по_умолчанию</code></em> |
+  GENERATED ALWAYS AS ( <em class="replaceable"><code>генерирующее_выражение</code></em> ) STORED |
+  GENERATED { ALWAYS | BY DEFAULT } AS IDENTITY [ ( <em class="replaceable"><code>параметры_последовательности</code></em> ) ] |
+  UNIQUE [ NULLS [ NOT ] DISTINCT ] <em class="replaceable"><code>параметры_индекса</code></em> |
+  PRIMARY KEY <em class="replaceable"><code>параметры_индекса</code></em> |
+  REFERENCES <em class="replaceable"><code>целевая_таблица</code></em> [ ( <em class="replaceable"><code>целевой_столбец</code></em> ) ] [ MATCH FULL | MATCH PARTIAL | MATCH SIMPLE ]
+    [ ON DELETE <em class="replaceable"><code>ссылочное_действие</code></em> ] [ ON UPDATE <em class="replaceable"><code>ссылочное_действие</code></em> ] }
+[ DEFERRABLE | NOT DEFERRABLE ] [ INITIALLY DEFERRED | INITIALLY IMMEDIATE ]
+
+<span class="phrase">и <em class="replaceable"><code>ограничение_таблицы</code></em>:</span>
+
+[ CONSTRAINT <em class="replaceable"><code>имя_ограничения</code></em> ]
+{ CHECK ( <em class="replaceable"><code>выражение</code></em> ) [ NO INHERIT ] |
+  UNIQUE [ NULLS [ NOT ] DISTINCT ] ( <em class="replaceable"><code>имя_столбца</code></em> [, ... ] ) <em class="replaceable"><code>параметры_индекса</code></em> |
+  PRIMARY KEY ( <em class="replaceable"><code>имя_столбца</code></em> [, ... ] ) <em class="replaceable"><code>параметры_индекса</code></em> |
+  EXCLUDE [ USING <em class="replaceable"><code>индексный_метод</code></em> ] ( <em class="replaceable"><code>элемент_исключения</code></em> WITH <em class="replaceable"><code>оператор</code></em> [, ... ] ) <em class="replaceable"><code>параметры_индекса</code></em> [ WHERE ( <em class="replaceable"><code>предикат</code></em> ) ] |
+  FOREIGN KEY ( <em class="replaceable"><code>имя_столбца</code></em> [, ... ] ) REFERENCES <em class="replaceable"><code>целевая_таблица</code></em> [ ( <em class="replaceable"><code>целевой_столбец</code></em> [, ... ] ) ]
+    [ MATCH FULL | MATCH PARTIAL | MATCH SIMPLE ] [ ON DELETE <em class="replaceable"><code>ссылочное_действие</code></em> ] [ ON UPDATE <em class="replaceable"><code>ссылочное_действие</code></em> ] }
+[ DEFERRABLE | NOT DEFERRABLE ] [ INITIALLY DEFERRED | INITIALLY IMMEDIATE ]
+
+<span class="phrase">и <em class="replaceable"><code>ограничение_таблицы_по_индексу</code></em>:</span>
+
+    [ CONSTRAINT <em class="replaceable"><code>имя_ограничения</code></em> ]
+    { UNIQUE | PRIMARY KEY } USING INDEX <em class="replaceable"><code>имя_индекса</code></em>
+    [ DEFERRABLE | NOT DEFERRABLE ] [ INITIALLY DEFERRED | INITIALLY IMMEDIATE ]
+
+<span class="phrase"><em class="replaceable"><code>параметры_индекса</code></em> в ограничениях <code class="literal">UNIQUE</code>, <code class="literal">PRIMARY KEY</code> и <code class="literal">EXCLUDE</code>:</span>
+
+[ INCLUDE ( <em class="replaceable"><code>имя_столбца</code></em> [, ... ] ) ]
+[ WITH ( <em class="replaceable"><code>параметр_хранения</code></em> [= <em class="replaceable"><code>значение</code></em>] [, ... ] ) ]
+[ USING INDEX TABLESPACE <em class="replaceable"><code>табл_пространство</code></em> ]
+
+<span class="phrase"><em class="replaceable"><code>элемент_исключения</code></em> в ограничении <code class="literal">EXCLUDE</code>:</span>
+
+{ <em class="replaceable"><code>имя_столбца</code></em> | ( <em class="replaceable"><code>выражение</code></em> ) } [ <em class="replaceable"><code>класс_операторов</code></em> ] [ ASC | DESC ] [ NULLS { FIRST | LAST } ]
+
+<span class="phrase"><em class="replaceable"><code>ссылочное_действие</code></em> в ограничении <code class="literal">FOREIGN KEY</code>/<code class="literal">REFERENCES</code>:</span>
+
+{ NO ACTION | RESTRICT | CASCADE | SET NULL [ ( <em class="replaceable"><code>имя_столбца</code></em> [, ... ] ) ] | SET DEFAULT [ ( <em class="replaceable"><code>имя_столбца</code></em> [, ... ] ) ] }</pre></div><div class="refsect1" id="id-1.9.3.36.5"><h2>Описание</h2><p><code class="command">ALTER TABLE</code> меняет определение существующей таблицы. Несколько её разновидностей описаны ниже. Заметьте, что для разных разновидностей могут требоваться разные уровни блокировок. Если явно не отмечено другое, запрашивается блокировка <code class="literal">ACCESS EXCLUSIVE</code>. При указании нескольких подкоманд будет запрашиваться самая сильная блокировка из требуемых ими. <div class="variablelist"><dl class="variablelist"><dt><span class="term"><code class="literal">ADD COLUMN [ IF NOT EXISTS ]</code></span><dd><p>Эта форма добавляет в таблицу новый столбец, с тем же синтаксисом, что и <a class="link" href="sql-createtable" title="CREATE TABLE"><code class="command">CREATE TABLE</code></a>. Если указано <code class="literal">IF NOT EXISTS</code> и столбец с таким именем уже существует, это не будет ошибкой.<dt><span class="term"><code class="literal">DROP COLUMN [ IF EXISTS ]</code></span><dd><p>Эта форма удаляет столбец из таблицы. При этом автоматически будут удалены индексы и ограничения таблицы, связанные с этим столбцом. Также будет удалена многовариантная статистика, охватывающая удаляемый столбец, если после его удаления в статистике останутся данные только одного столбца. Если от этого столбца зависят какие либо объекты вне этой таблицы, например, внешние ключи или представления, чтобы удалить их, необходимо добавить указание <code class="literal">CASCADE</code>. Если в команде указано <code class="literal">IF EXISTS</code> и этот столбец не существует, это не считается ошибкой, вместо этого просто выдаётся замечание.<dt><span class="term"><code class="literal">SET DATA TYPE</code></span><dd><p>Эта форма меняет тип столбца таблицы. Индексы и простые табличные ограничения, включающие этот столбец, будут автоматически преобразованы для использования нового типа столбца, для чего будет заново разобрано определяющее их выражение. Необязательное предложение <code class="literal">COLLATE</code> задаёт правило сортировки для нового столбца; если оно опущено, выбирается правило сортировки по умолчанию для нового типа. Необязательное предложение <code class="literal">USING</code> определяет, как новое значение столбца будет получено из старого; если оно отсутствует, выполняется приведение типа по умолчанию, как обычное присваивание значения старого типа новому. Предложение <code class="literal">USING</code> становится обязательным, если неявное приведение или присваивание с приведением старого типа к новому не определено.<p>При изменении типа столбца статистика столбца удаляется, поэтому после этой операции для таблицы рекомендуется выполнить <a class="link" href="sql-analyze" title="ANALYZE"><code class="command">ANALYZE</code></a>.<dt><span class="term"><code class="literal">SET</code>/<code class="literal">DROP DEFAULT</code></span><dd><p>Эти формы задают или удаляют значение по умолчанию для столбца (удаление равносильно указанию NULL в качестве значения по умолчанию). Новые значения по умолчанию применяются только при последующих командах <code class="command">INSERT</code> или <code class="command">UPDATE</code>; их изменения не отражаются в строках, уже существующих в таблице.<dt><span class="term"><code class="literal">SET</code>/<code class="literal">DROP NOT NULL</code></span><dd><p>Эти формы определяют, будет ли столбец принимать значения NULL или нет.<p>Указание <code class="literal">SET NOT NULL</code> можно применить к столбцу, только если ни одна из записей таблицы не содержит в этом столбце значение <code class="literal">NULL</code>. Обычно эта проверка производится в момент выполнения <code class="literal">ALTER TABLE</code> и требует сканирования всей таблицы; однако в случае наличия ограничений <code class="literal">CHECK</code>, гарантирующих отсутствие <code class="literal">NULL</code>, сканирование таблицы пропускается.<p>Если данная таблица является секцией, операцию <code class="literal">DROP NOT NULL</code> нельзя выполнить для столбца, если он определён с характеристикой <code class="literal">NOT NULL</code> в родительской таблице. Чтобы удалить ограничение <code class="literal">NOT NULL</code> из всех секций, выполните <code class="literal">DROP NOT NULL</code> для родительской таблицы. Даже если ограничение <code class="literal">NOT NULL</code> в родительской таблице отсутствует, при желании такое ограничение может быть добавлено в отдельные секции. Другими словами, потомки могут запрещать значения NULL, даже если родитель их допускает, но не наоборот.<dt><span class="term"><code class="literal">DROP EXPRESSION [ IF EXISTS ]</code></span><dd><p>Эта форма преобразует хранимый генерируемый столбец в обычный. Существующие данные в столбцах сохраняются, но будущие изменения будут вноситься не генерирующим выражением.<p>Если указано <code class="literal">DROP EXPRESSION IF EXISTS</code> и заданный столбец не является хранимым генерируемым столбцом, это не считается ошибкой. В этом случае выдаётся только замечание.<dt><span class="term"><code class="literal">ADD GENERATED { ALWAYS | BY DEFAULT } AS IDENTITY</code><br /></span><span class="term"><code class="literal">SET GENERATED { ALWAYS | BY DEFAULT }</code><br /></span><span class="term"><code class="literal">DROP IDENTITY [ IF EXISTS ]</code></span><dd><p>Это формы меняют для столбца свойство идентификации или меняют характеристику генерирования для существующего столбца идентификации. За подробностями обратитесь к описанию <a class="link" href="sql-createtable" title="CREATE TABLE"><code class="command">CREATE TABLE</code></a>. Как и <code class="literal">SET DEFAULT</code>, эти формы влияют на поведение только последующих команд <code class="command">INSERT</code> и <code class="command">UPDATE</code>; их действие не отражаются в строках, уже существующих в таблице.<p>Если указано <code class="literal">DROP IDENTITY IF EXISTS</code> и заданный столбец не является столбцом идентификации, это не считается ошибкой. В этом случае выдаётся только замечание.<dt><span class="term"><code class="literal">SET <em class="replaceable"><code>параметр_последовательности</code></em></code><br /></span><span class="term"><code class="literal">RESTART</code></span><dd><p>Эти формы меняют нижележащую последовательность ранее созданного столбца идентификации. Здесь <em class="replaceable"><code>параметр_последовательности</code></em> — это параметр, поддерживаемый командой <a class="link" href="sql-altersequence" title="ALTER SEQUENCE"><code class="command">ALTER SEQUENCE</code></a>, например <code class="literal">INCREMENT BY</code>.<dt><span class="term"><code class="literal">SET STATISTICS</code></span><dd><p>Эта форма задаёт ориентир сбора статистики по столбцу для последующих операций <a class="link" href="sql-analyze" title="ANALYZE"><code class="command">ANALYZE</code></a>. Диапазон допустимых значений ориентира: 0..10000; при -1 применяется системное значение по умолчанию (<a class="xref" href="runtime-config-query#GUC-DEFAULT-STATISTICS-TARGET">default_statistics_target</a>). За дополнительными сведениями об использовании статистики планировщиком запросов <span class="productname">Postgres Pro</span> обратитесь к <a class="xref" href="planner-stats" title="14.2. Статистика, используемая планировщиком">Разделу 14.2</a>.<p><code class="literal">SET STATISTICS</code> запрашивает блокировку <code class="literal">SHARE UPDATE EXCLUSIVE</code>.<dt><span class="term"><code class="literal">SET ( <em class="replaceable"><code>атрибут</code></em> = <em class="replaceable"><code>значение</code></em> [, ... ] )</code><br /></span><span class="term"><code class="literal">RESET ( <em class="replaceable"><code>атрибут</code></em> [, ... ] )</code></span><dd><p>Эта форма устанавливает или сбрасывает параметры атрибутов. В настоящее время единственными параметрами атрибутов являются <code class="literal">n_distinct</code> и <code class="literal">n_distinct_inherited</code>, которые переопределяют оценку кол-ва_различных_значений, производимую последующими операциями <a class="link" href="sql-analyze" title="ANALYZE"><code class="command">ANALYZE</code></a>. Атрибут <code class="literal">n_distinct</code> влияет на расчёт статистики по самой таблице, а <code class="literal">n_distinct_inherited</code> — на статистику по таблице и её потомкам. Если заданное значение положительно, <code class="command">ANALYZE</code> будет считать, что столбец содержит именно это количество различных значений не NULL. Если заданное значение отрицательно (оно должно быть больше или равно -1), <code class="command">ANALYZE</code> будет считать, что количество различных значений не NULL в столбце линейно зависит от размера таблицы; точное число будет получено умножением примерного размера таблицы на абсолютное значение параметра. Например, при -1 будет предполагаться, что различны все значения в столбце, а при -0,5 — что в среднем каждое значение повторяется дважды. Это может быть полезно, когда размер таблицы меняется со временем, так как умножение на число строк в таблице производится только во время планирования запроса. С 0 количество различных значений оценивается как обычно. За дополнительными сведениями об использовании статистики планировщиком запросов <span class="productname">Postgres Pro</span> обратитесь к <a class="xref" href="planner-stats" title="14.2. Статистика, используемая планировщиком">Разделу 14.2</a>.<p>Для изменения параметров атрибутов запрашивается блокировка <code class="literal">SHARE UPDATE EXCLUSIVE</code>.<dt><span class="term"> <code class="literal">SET STORAGE</code> <a class="indexterm" id="id-1.9.3.36.5.2.3.11.1.2"></a> </span><dd><p>Эта форма устанавливает режим хранения столбца. Она определяет, хранятся ли данные внутри таблицы или в отдельной таблице <acronym class="acronym">TOAST</acronym>, а также, сжимаются ли они. Режим <code class="literal">PLAIN</code> должен применяться для значений фиксированной длины, таких как <code class="type">integer</code>; это вариант хранения внутри, без сжатия. Режим <code class="literal">MAIN</code> применяется для хранения внутри, но сжатых данных, <code class="literal">EXTERNAL</code> — для внешнего хранения несжатых данных, а <code class="literal">EXTENDED</code> — для внешнего хранения сжатых данных. <code class="literal">EXTENDED</code> используется по умолчанию для большинства типов данных, поддерживающих хранилище не <code class="literal">PLAIN</code>. Применение <code class="literal">EXTERNAL</code> позволяет ускорить операции с подстроками на очень больших значениях <code class="type">text</code> и <code class="type">bytea</code>, за счёт проигрыша в объёме хранилища. Заметьте, что предложение <code class="literal">SET STORAGE</code> само по себе не меняет ничего в таблице, оно только задаёт стратегию, которая будет реализована при будущих изменениях в таблице. За дополнительными сведениями обратитесь к <a class="xref" href="storage-toast" title="72.2. TOAST">Разделу 72.2</a>.<dt><span class="term"> <code class="literal">SET COMPRESSION <em class="replaceable"><code>метод_сжатия</code></em></code> </span><dd><p>Эта форма задаёт метод сжатия для столбца, определяющий, как будут сжиматься значения, помещаемые в этот столбец в будущем (если режим хранения вообще допускает сжатие). При изменении этого метода перезапись таблицы не производится, поэтому уже существующие в таблице данные могут оставаться сжатыми другими методами. Если таблица восстанавливается средством <span class="application">pg_restore</span>, все значения перезаписываются с применением заданного метода сжатия. Если же данные вставляются из другого отношения (например, командой <code class="command">INSERT ... SELECT</code>), значения из исходной таблицы не обязательно будут распаковываться, так что ранее сжатые данные могут сохраниться с прежним методом сжатия, они не будут пережиматься методом, установленным для целевого столбца. Поддерживаемые методы сжатия: <code class="literal">pglz</code> и <code class="literal">lz4</code>. (<code class="literal">lz4</code> поддерживается, только если <span class="productname">Postgres Pro</span> был собран с ключом <code class="option">--with-lz4</code>.) Кроме того, <em class="replaceable"><code>метод_сжатия</code></em> может принимать значение <code class="literal">default</code>, с которым применяемый метод сжатия определяется текущим значением параметра <a class="xref" href="runtime-config-client#GUC-DEFAULT-TOAST-COMPRESSION">default_toast_compression</a> во время добавления данных.<dt><span class="term"><code class="literal">ADD <em class="replaceable"><code>ограничение_таблицы</code></em> [ NOT VALID ]</code></span><dd><p>Эта форма добавляет в таблицу новое ограничение, принимая тот же синтаксис описания ограничения, что и <a class="link" href="sql-createtable" title="CREATE TABLE"><code class="command">CREATE TABLE</code></a>, а также дополнительное указание <code class="literal">NOT VALID</code>, которое в настоящее время поддерживается только для ограничений внешнего ключа и ограничений-проверок.<p>Обычно эта форма влечёт сканирование всей таблицы для проверки, что все существующие строки в таблице удовлетворяют новому ограничению. Но если используется указание <code class="literal">NOT VALID</code>, эта потенциально длительная проверка пропускается. Тем не менее это ограничение будет действовать при последующих добавлениях или изменениях данных (то есть эти операции не будут выполнены, если новая строка нарушит условие ограничения-проверки, либо при наличии внешнего ключа в главной таблице не найдётся соответствующая строка). Но база данных не будет считать, что ограничение выполняется для всех строк таблицы, пока оно не будет проверено с применением указания <code class="literal">VALIDATE CONSTRAINT</code>. Дополнительную информацию об использовании указания <code class="literal">NOT VALID</code> вы найдете ниже, в разделе <a class="xref" href="sql-altertable#SQL-ALTERTABLE-NOTES" title="Замечания">Замечания</a>.<p>Хотя почти все разновидности <code class="literal">ADD <em class="replaceable"><code>ограничение_таблицы</code></em></code> требуют блокировку <code class="literal">ACCESS EXCLUSIVE</code>, для указания <code class="literal">ADD FOREIGN KEY</code> требуется только блокировка <code class="literal">SHARE ROW EXCLUSIVE</code>. Заметьте, что <code class="literal">ADD FOREIGN KEY</code> запрашивает такую блокировку как в таблице, в которой добавляется это ограничение, так и в таблице, на которую это ограничение ссылается.<p>С ограничениями уникальности и первичного ключа, добавляемыми в секционированные таблицы, связаны дополнительные требования; см. описание <a class="link" href="sql-createtable" title="CREATE TABLE"><code class="command">CREATE TABLE</code></a>. Кроме того, в настоящее время ограничения внешнего ключа для секционированных таблиц не могут объявляться как непроверенные (<code class="literal">NOT VALID</code>).<dt><span class="term"><code class="literal">ADD <em class="replaceable"><code>ограничение_таблицы_по_индексу</code></em></code></span><dd><p>Эта форма добавляет в таблицу новое ограничение <code class="literal">PRIMARY KEY</code> или <code class="literal">UNIQUE</code> на базе существующего уникального индекса. В это ограничение будут включены все столбцы данного индекса.<p>Индекс не может быть частичным и включать столбцы-выражения. Кроме того, это должен быть индекс-B-дерево с порядком сортировки по умолчанию. С такими ограничениями добавляемые индексы не будут ничем отличаться от индексов, создаваемых обычными командами <code class="literal">ADD PRIMARY KEY</code> и <code class="literal">ADD UNIQUE</code>.<p>В случае с указанием <code class="literal">PRIMARY KEY</code>, если столбцы индекса ещё не помечены <code class="literal">NOT NULL</code>, данная команда попытается выполнить <code class="literal">ALTER COLUMN SET NOT NULL</code> для каждого столбца. При этом потребуется произвести полное сканирование таблицы, чтобы убедиться, что столбец(ы) не содержит NULL. Во всех остальных случаях это быстрая операция.<p>Если задано имя ограничения, индекс будет переименован и получит заданное имя. В противном случае именем ограничения станет имя индекса.<p>После выполнения этой команды индекс становится <span class="quote">«<span class="quote">принадлежащим</span>»</span> ограничению, так же, как если бы он был создан обычной командой <code class="literal">ADD PRIMARY KEY</code> или <code class="literal">ADD UNIQUE</code>. Это значит, в частности, что при удалении ограничения индекс будет удалён вместе с ним.<p>Эта форма с секционированными таблицами в настоящее время не поддерживается.<div class="note"><h3 class="title">Примечание</h3><p>Добавление ограничения на базе существующего индекса бывает полезно в ситуациях, когда новое ограничение требуется добавить, не блокируя изменения в таблице на долгое время. Для этого можно создать индекс командой <code class="command">CREATE INDEX CONCURRENTLY</code>, а затем задействовать его как полноценное ограничение, используя эту запись. См. следующий пример.</div><dt><span class="term"><code class="literal">ALTER CONSTRAINT</code></span><dd><p>Эта форма меняет атрибуты созданного ранее ограничения. В настоящее время изменять можно только ограничения внешнего ключа.<dt><span class="term"><code class="literal">VALIDATE CONSTRAINT</code></span><dd><p>Эта форма проверяет ограничение внешнего ключа или ограничение-проверку, созданное ранее с указанием <code class="literal">NOT VALID</code>, сканируя всю таблицу с целью убедиться, что ограничению удовлетворяют все строки. Если ограничение уже помечено как проверенное, ничего не происходит. (В чём польза этой команды, вы можете узнать в разделе <a class="xref" href="sql-altertable#SQL-ALTERTABLE-NOTES" title="Замечания">Замечания</a>.)<p>Эта команда запрашивает блокировку <code class="literal">SHARE UPDATE EXCLUSIVE</code>.<dt><span class="term"><code class="literal">DROP CONSTRAINT [ IF EXISTS ]</code></span><dd><p>Эта форма удаляет указанное ограничение таблицы, вместе с нижележащим индексом, если таковой имеется. Если указано <code class="literal">IF EXISTS</code> и заданное ограничение не существует, это не считается ошибкой. В этом случае выдаётся только замечание.<dt><span class="term"><code class="literal">DISABLE</code>/<code class="literal">ENABLE [ REPLICA | ALWAYS ] TRIGGER</code></span><dd><p>Эти формы настраивают срабатывание триггера(ов), принадлежащего таблице. Отключённый триггер сохраняется в системе, но не выполняется, когда происходит вызывающее его событие. (Для отложенных триггеров состояние включения проверяется при возникновении события, а не когда фактически вызывается функция триггера.) Эта команда может отключить или включить один триггер по имени, либо все триггеры таблицы, либо только пользовательские триггеры (кроме сгенерированных внутрисистемных триггеров ограничений, например, триггеров, реализующих ограничения внешнего ключа или отложенные ограничения уникальности и ограничения-исключения). Для отключения или включения сгенерированных внутрисистемных триггеров ограничений требуются права суперпользователя; отключать их следует с осторожностью, так как очевидно, что невозможно гарантировать целостность ограничений, если триггеры не работают.<p>На механизм срабатывания триггеров также влияет конфигурационная переменная <a class="xref" href="runtime-config-client#GUC-SESSION-REPLICATION-ROLE">session_replication_role</a>. Включённые без дополнительных указаний (по умолчанию) триггеры будут срабатывать, когда роль репликации — <span class="quote">«<span class="quote">origin</span>»</span> (по умолчанию) или <span class="quote">«<span class="quote">local</span>»</span>. Триггеры, включённые указанием <code class="literal">ENABLE REPLICA</code>, будут срабатывать, только если текущий режим сеанса — <span class="quote">«<span class="quote">replica</span>»</span>, а триггеры, включённые указанием <code class="literal">ENABLE ALWAYS</code>, будут срабатывать независимо от текущего режима репликации.<p>Эффект этого механизма состоит в том, что в конфигурации по умолчанию триггеры не срабатывают в репликах. Это полезно, потому что если триггер используется в исходной базе для распределения данных по таблицам, система репликации будет реплицировать и распределённые таким образом данные, поэтому триггер не должен срабатывать в реплике второй раз, так как иначе будет иметь место дублирование. Однако если триггер используется для других целей, например, выдаёт уведомления, может иметь смысл установить для него свойство <code class="literal">ENABLE ALWAYS</code>, чтобы он также срабатывал в репликах.<p>Когда эта команда применяется к секционированной таблице, состояния соответствующих «клонированных» триггеров в секциях также изменяются, если не указано <code class="literal">ONLY</code>.<p>Эта команда запрашивает блокировку <code class="literal">SHARE ROW EXCLUSIVE</code>.<dt><span class="term"><code class="literal">DISABLE</code>/<code class="literal">ENABLE [ REPLICA | ALWAYS ] RULE</code></span><dd><p>Эти формы настраивают срабатывание правил перезаписи, относящихся к таблице. Отключённое правило сохраняется в системе, но не применяется во время переписывания запроса. По сути эти операции подобны операциям включения/отключения триггеров. Однако это не распространяется на правила <code class="literal">ON SELECT</code> — они применяются всегда, чтобы представления продолжали работать, даже в сеансах, исполняющих не основную роль репликации.<p>На механизм срабатывания правил также оказывает влияние конфигурационная переменная <a class="xref" href="runtime-config-client#GUC-SESSION-REPLICATION-ROLE">session_replication_role</a>, подобное тому, что описано выше применительно к триггерам.<dt><span class="term"><code class="literal">DISABLE</code>/<code class="literal">ENABLE ROW LEVEL SECURITY</code></span><dd><p>Эти формы управляют применением относящихся к таблице политик защиты строк. Если защита включается, но политики для таблицы не определены, применяется политика запрета доступа по умолчанию. Заметьте, что политики могут быть определены для таблицы, даже если защита на уровне строк отключена. В этом случае политики <span class="emphasis"><em>не</em></span> применяются и их ограничения игнорируются. См. также описание <a class="link" href="sql-createpolicy" title="CREATE POLICY"><code class="command">CREATE POLICY</code></a>.<dt><span class="term"><code class="literal">NO FORCE</code>/<code class="literal">FORCE ROW LEVEL SECURITY</code></span><dd><p>Эти формы управляют применением относящихся к таблице политик защиты строк, когда пользователь является её владельцем. Если это поведение включается, политики защиты на уровне строк будут действовать и на владельца таблицы. Если оно отключено (по умолчанию), защита на уровне строк не будет действовать на пользователя, являющегося владельцем таблицы. См. также описание <a class="link" href="sql-createpolicy" title="CREATE POLICY"><code class="command">CREATE POLICY</code></a>.<dt><span class="term"><code class="literal">CLUSTER ON</code></span><dd><p>Эта форма выбирает индекс по умолчанию для последующих операций <a class="link" href="sql-cluster" title="CLUSTER"><code class="command">CLUSTER</code></a>. Собственно кластеризация таблицы при этом не выполняется.<p>Для изменения параметров кластеризации запрашивается блокировка <code class="literal">SHARE UPDATE EXCLUSIVE</code>.<dt><span class="term"><code class="literal">SET WITHOUT CLUSTER</code></span><dd><p>Эта форма удаляет последнее заданное указание индекса для <a class="link" href="sql-cluster" title="CLUSTER"><code class="command">CLUSTER</code></a>. Её действие отразится на будущих операциях кластеризации, для которых не будет задан индекс.<p>Для изменения параметров кластеризации запрашивается блокировка <code class="literal">SHARE UPDATE EXCLUSIVE</code>.<dt><span class="term"><code class="literal">SET WITHOUT OIDS</code></span><dd><p>Обеспечивающий обратную совместимость синтаксис удаления системного столбца <code class="literal">oid</code>. Так как добавить системные столбцы <code class="literal">oid</code> теперь невозможно, это указание фактически не действует.<dt><span class="term"><code class="literal">SET ACCESS METHOD</code></span><dd><p>Эта форма изменяет метод доступа к таблице, переписывая её. За подробным описанием обратитесь к <a class="xref" href="tableam" title="Глава 62. Определение интерфейса для табличных методов доступа">Главе 62</a>.<dt><span class="term"><code class="literal">SET TABLESPACE</code></span><dd><p>Эта форма меняет табличное пространство таблицы на заданное и перемещает файлы данных, связанные с таблицей, в новое пространство. Индексы таблицы, если они имеются, не перемещаются; однако их можно переместить отдельно дополнительными командами <code class="literal">SET TABLESPACE</code>. В секционированной таблице при этом ничего не перемещается, но секции, созданные впоследствии с указанием <code class="command">CREATE TABLE PARTITION OF</code>, будут использовать это табличное пространство (если только оно не будет переопределено предложением <code class="literal">TABLESPACE</code>).<p>Форма <code class="literal">ALL IN TABLESPACE</code> позволяет перенести в другое табличное пространство все таблицы текущей базы данных в текущем пространстве, при этом она сначала блокирует все таблицы, а затем переносит каждую из них. Эта форма также поддерживает предложение <code class="literal">OWNED BY</code>, с которым перемещаются только таблицы указанных владельцев. C указанием <code class="literal">NOWAIT</code> команда завершается ошибкой, если не может получить все требуемые блокировки немедленно. Заметьте, что системные каталоги эта форма не перемещает; если требуется переместить их, следует использовать <code class="command">ALTER DATABASE</code> или явные вызовы <code class="command">ALTER TABLE</code>. Отношения <code class="literal">information_schema</code> не считаются частью системных каталогов и подлежат перемещению. См. также описание <a class="link" href="sql-createtablespace" title="CREATE TABLESPACE"><code class="command">CREATE TABLESPACE</code></a>.<dt><span class="term"><code class="literal">SET { LOGGED | UNLOGGED }</code></span><dd><p>Эта форма меняет характеристику журналирования таблицы, делает таблицу журналируемой/нежурналируемой, соответственно (см. <a class="xref" href="sql-createtable#SQL-CREATETABLE-UNLOGGED"><code class="literal">UNLOGGED</code></a>). К временной таблице она неприменима.<p>При этом также меняется режим журналирования всех последовательностей, связанных с таблицей (с её столбцами идентификаторов или столбцами serial). Однако режим журналирования таких последовательностей можно изменить и отдельно.<dt><span class="term"><code class="literal">SET CONSTANT</code></span><dd><p>Эта форма переводит таблицу в режим «только чтение». В таких таблицах нельзя изменить или добавить данные, и они не обрабатываются при <a class="link" href="routine-vacuuming#AUTOVACUUM" title="24.1.6. Демон автоочистки">автоочистке</a>. Вернуть в режим «чтение-запись» такие таблицы невозможно.<dt><span class="term"><code class="literal">SET ( <em class="replaceable"><code>параметр_хранения</code></em> [= <em class="replaceable"><code>значение</code></em>] [, ... ] )</code></span><dd><p>Эта форма меняет один или несколько параметров хранения таблицы. Подробнее допустимые параметры рассмотрены в разделе <a class="xref" href="sql-createtable#SQL-CREATETABLE-STORAGE-PARAMETERS" title="Параметры хранения">Параметры хранения</a> описания <a class="link" href="sql-createtable" title="CREATE TABLE"><code class="command">CREATE TABLE</code></a>. Заметьте, что эта команда не меняет содержимое таблицы немедленно; в зависимости от параметра может потребоваться перезаписать таблицы, чтобы получить желаемый эффект. Это можно сделать с помощью команд <a class="link" href="sql-vacuum" title="VACUUM"><code class="command">VACUUM FULL</code></a>, <a class="link" href="sql-cluster" title="CLUSTER"><code class="command">CLUSTER</code></a> или одной из форм <code class="command">ALTER TABLE</code>, принудительно перезаписывающих таблицу. Изменения параметров, связанных с планировщиком, вступают в силу при следующей блокировке таблицы, так что в текущих запросах они не проявляются.<p>Данная форма затребует блокировку <code class="literal">SHARE UPDATE EXCLUSIVE</code> для изменения параметров хранения, связанных с фактором заполнения, TOAST и автоочисткой, а также параметра планировщика <code class="varname">parallel_workers</code>.<dt><span class="term"><code class="literal">RESET ( <em class="replaceable"><code>параметр_хранения</code></em> [, ... ] )</code></span><dd><p>Эта форма сбрасывает один или несколько параметров хранения к значениям по умолчанию. Как и с <code class="literal">SET</code>, для полного обновления таблицы может потребоваться перезаписать таблицу.<dt><span class="term"><code class="literal">INHERIT <em class="replaceable"><code>таблица_родитель</code></em></code></span><dd><p>Эта форма назначает целевую таблицу потомком заданной родительской таблицы. Впоследствии запросы к родительской таблице будут включать записи и целевой таблицы. Чтобы таблица могла стать потомком, она должна содержать те же столбцы, что и родительская (хотя она может включать и дополнительные столбцы). Столбцы должны иметь одинаковые типы данных и, если в родительской таблице какие-то из них имеют ограничение <code class="literal">NOT NULL</code>, они должны иметь ограничение <code class="literal">NOT NULL</code> и в таблице-потомке.<p>Также в таблице-потомке должны присутствовать все ограничения <code class="literal">CHECK</code> родительской таблицы, за исключением ненаследуемых (то есть созданных командой <code class="literal">ALTER TABLE ... ADD CONSTRAINT ... NO INHERIT</code>), которые игнорируются; при этом все соответствующие ограничения в таблице-потомке не должны быть ненаследуемыми. В настоящее время ограничения <code class="literal">UNIQUE</code>, <code class="literal">PRIMARY KEY</code> и <code class="literal">FOREIGN KEY</code> не учитываются, но в будущем это может измениться.<dt><span class="term"><code class="literal">NO INHERIT <em class="replaceable"><code>таблица_родитель</code></em></code></span><dd><p>Эта форма удаляет целевую таблицу из списка потомков указанной родительской таблицы. Результаты запросов к родительской таблице после этого не будут включать записи, взятые из целевой таблицы.<dt><span class="term"><code class="literal">OF <em class="replaceable"><code>имя_типа</code></em></code></span><dd><p>Эта форма связывает таблицу с составным типом, как если бы она была сформирована командой <code class="command">CREATE TABLE OF</code>. При этом список имён и типов столбцов должен точно соответствовать тому, что образует составной тип. Кроме того, таблица не должна быть потомком какой-либо другой таблицы. Эти ограничения гарантируют, что команда <code class="command">CREATE TABLE OF</code> позволит создать таблицу с таким же определением.<dt><span class="term"><code class="literal">NOT OF</code></span><dd><p>Эта форма разрывает связь типизированной таблицы с её типом.<dt><span class="term"><code class="literal">OWNER TO</code></span><dd><p>Эта форма меняет владельца таблицы, последовательности, представления, материализованного представления или сторонней таблицы на заданного пользователя.<dt id="SQL-ALTERTABLE-REPLICA-IDENTITY"><span class="term"><code class="literal">REPLICA IDENTITY</code></span><dd><p>Эта форма меняет информацию, записываемую в журнал предзаписи для идентификации изменяемых или удаляемых строк. В большинстве случаев старое значение в каждом столбце записывается, только если оно отличается от нового, но значение, хранящееся отдельно, записывается всегда, даже если оно не изменилось. Данный параметр действует только при использовании логической репликации. <div class="variablelist"><dl class="variablelist"><dt><span class="term"><code class="literal">DEFAULT</code></span><dd><p>Записываются старые значения столбцов первичного ключа, если он есть. Это режим по умолчанию для несистемных таблиц.<dt><span class="term"><code class="literal">USING INDEX <em class="replaceable"><code>имя_индекса</code></em></code></span><dd><p>Записываются старые значения столбцов, составляющих заданный индекс, который должен быть уникальным, не частичным, не отложенным и включать только столбцы, помеченные <code class="literal">NOT NULL</code>. Если этот индекс удалён, поведение будет таким же, как в режиме <code class="literal">NOTHING</code>.<dt><span class="term"><code class="literal">FULL</code></span><dd><p>Записываются старые значения всех столбцов в строке.<dt><span class="term"><code class="literal">NOTHING</code></span><dd><p>Информация о старой строке не записывается. Это режим по умолчанию для системных таблиц.</dl></div><dt><span class="term"><code class="literal">RENAME</code></span><dd><p>Формы <code class="literal">RENAME</code> меняют имя таблицы (или индекса, последовательности, представления, материализованного представления или сторонней таблицы), имя отдельного столбца таблицы или имя ограничения таблицы. При переименовании ограничения, у которого имеется нижележащий индекс, этот индекс также переименовывается. На хранимые данные это не влияет.<dt><span class="term"><code class="literal">SET SCHEMA</code></span><dd><p>Эта форма перемещает таблицу в другую схему. Вместе с таблицей перемещаются связанные с ней индексы и ограничения, а также последовательности, принадлежащие столбцам таблицы.<dt id="SQL-ALTERTABLE-ATTACH-PARTITION"><span class="term"><code class="literal">ATTACH PARTITION <em class="replaceable"><code>имя_секции</code></em> { FOR VALUES <em class="replaceable"><code>указание_границ_секции</code></em> | DEFAULT }</code></span><dd><p>Эта форма присоединяет существующую таблицу (которая тоже может быть секционированной) в качестве секции к целевой таблице. С указанием <code class="literal">FOR VALUES</code> таблица станет секцией для определённых значений, а с указанием <code class="literal">DEFAULT</code> — секцией по умолчанию. Для каждого индекса в целевой таблице будет создан соответствующий индекс в присоединяемой таблице; или, если равнозначный индекс уже существует, он будет присоединён к индексу целевой таблицы, как при выполнении команды <code class="command">ALTER INDEX ATTACH PARTITION</code>. Заметьте, что если существующая таблица является сторонней, в настоящее время её нельзя присоединить в качестве секции к целевой таблице, в которой имеются уникальные индексы (<code class="literal">UNIQUE</code>). (См. также <a class="xref" href="sql-createforeigntable" title="CREATE FOREIGN TABLE"><span class="refentrytitle">CREATE FOREIGN TABLE</span></a>.) Также для каждого существующего в целевой таблице пользовательского триггера уровня строк будет создан такой же триггер в присоединяемой таблице.<p>Для секции, добавляемой с <code class="literal">FOR VALUES</code>, используется то же <em class="replaceable"><code>указание_границ_секции</code></em>, что и в <a class="link" href="sql-createtable" title="CREATE TABLE"><code class="command">CREATE TABLE</code></a>. Это указание должно соответствовать стратегии секционирования и ключу разбиения целевой таблицы. Присоединяемая таблица должна иметь те же столбцы, что и целевая, и никаких других; более того, должны совпадать и типы столбцов. Кроме того, в ней должны быть те же ограничения <code class="literal">NOT NULL</code> и <code class="literal">CHECK</code>, что и в целевой таблице. Ограничения <code class="literal">FOREIGN KEY</code> в настоящее время не учитываются. Если какое-либо из ограничений <code class="literal">CHECK</code> присоединяемой таблицы помечено как <code class="literal">NO INHERIT</code>, команда выдаст ошибку; такие ограничения нужно будет пересоздать без предложения <code class="literal">NO INHERIT</code>.<p>Если новая секция является обычной таблицей, чтобы убедиться, что ни одна строка в таблице не нарушает ограничение секции, производится полное сканирование таблицы. Такого сканирования можно избежать, добавив перед выполнением этой команды в таблицу действующее ограничение <code class="literal">CHECK</code>, допускающее только такие строки, которые удовлетворяют задаваемому ограничению секции. Наличие этого ограничения позволит определить, что таблицу не нужно сканировать для проверки ограничения секции. Однако это не будет работать, если какие-либо ключи разбиения являются выражениями и секция не принимает значения <code class="literal">NULL</code>. При присоединении секции по списку, не принимающей значения <code class="literal">NULL</code>, также добавьте ограничение <code class="literal">NOT NULL</code> в столбец ключа разбиения, если это не выражение.<p>Если новая секция является сторонней таблицей, никакая проверка, удовлетворяют ли все строки сторонней таблицы ограничению секции, не выполняется. (Обсуждение ограничений сторонней таблицы вы можете найти в <a class="xref" href="sql-createforeigntable" title="CREATE FOREIGN TABLE"><span class="refentrytitle">CREATE FOREIGN TABLE</span></a>.)<p>Когда у таблицы есть секция по умолчанию, у данной секции при добавлении новой меняется ограничение секции. Секция по умолчанию не может содержать строки, которые должны быть перенесены в новую секцию, поэтому она будет просканирована и проверена на предмет их отсутствия. Этого сканирования, как и сканирования новой секции, можно избежать, если определить подходящее ограничение <code class="literal">CHECK</code>. Кроме того, сканирование этой секции, как и новой, всегда пропускается, когда данная секция является сторонней таблицей.<p>Для присоединения секции затребуется блокировка <code class="literal">SHARE UPDATE EXCLUSIVE</code> в родительской таблице, помимо блокировок <code class="literal">ACCESS EXCLUSIVE</code> в присоединяемых таблицах и секции по умолчанию (при наличии).<p>Подобные блокировки также должны устанавливаться во всех вложенных секциях, если присоединяемая таблица либо секция по умолчанию в свою очередь является секционированной таблицей. Блокировки вложенных секций можно избежать, добавив ограничение <code class="literal">CHECK</code>, как это описано в <a class="xref" href="ddl-partitioning#DDL-PARTITIONING-DECLARATIVE-MAINTENANCE" title="5.11.2.2. Обслуживание секций">Подразделе 5.11.2.2</a>.<p>Эта форма не поддерживается механизмом секционирования <code class="filename">pg_pathman</code>.<dt id="SQL-ALTERTABLE-DETACH-PARTITION"><span class="term"><code class="literal">DETACH PARTITION <em class="replaceable"><code>имя_секции</code></em> [ CONCURRENTLY | FINALIZE ]</code></span><dd><p>Эта форма отсоединяет заданную секцию от целевой таблицы. Отсоединяемая секция продолжит существовать как отдельная таблица, но более не будет иметь никаких связей с таблицей, от которой была отсоединена. Все индексы, которые были присоединены к индексам целевой таблицы, отсоединяются, а триггеры, созданные как копии существующих в целевой таблице, удаляются. Таблицы, ссылающиеся на секционированную таблицу через внешние ключи, блокируются в режиме <code class="literal">SHARE</code>.<p>С указанием <code class="literal">CONCURRENTLY</code> эта операция выполняется с пониженным уровнем блокировок во избежание блокирования других сеансов, которые могут обращаться к данной секционированной таблице. В этом режиме отсоединение производится в двух транзакциях. В первой транзакции в родительской таблице и заданной секции устанавливается блокировка <code class="literal">SHARE UPDATE EXCLUSIVE</code>, а секция помечается как отсоединяемая, после чего транзакция фиксируется; затем должны завершиться все остальные транзакции, использующие секционированную таблицу. Когда все они завершаются, вторая транзакция получает блокировку <code class="literal">SHARE UPDATE EXCLUSIVE</code> для секционированной таблицы и <code class="literal">ACCESS EXCLUSIVE</code> для отсоединяемой секции, после чего процесс отсоединения заканчивается. В секцию добавляется ограничение <code class="literal">CHECK</code>, повторяющее ограничение секции. Указание <code class="literal">CONCURRENTLY</code> нельзя использовать в блоке транзакции, а также оно не допускается, если секционированная таблица содержит секцию по умолчанию.<p>Указание <code class="literal">FINALIZE</code> позволяет завершить операцию <code class="literal">DETACH CONCURRENTLY</code>, прерванную или отменённую ранее. В один момент времени в состоянии отсоединения от некоторой секционированной таблицы может находиться не более одной секции.<p>Эта форма не поддерживается механизмом секционирования <code class="filename">pg_pathman</code>.</dl></div><p><span class="strong"><strong>Действия <code class="filename">pg_pathman</code></strong></span><p>Расширение <code class="filename">pg_pathman</code> из состава <span class="productname">Postgres Pro Enterprise</span> предоставляет несколько различных форм команд для создания секций таблицы и управления ими. Эти формы не будут работать с таблицами, секционируемыми с использованием функциональности ядра. Для ещё не секционированных таблиц можно использовать форму <code class="literal">PARTITION BY</code>, если параметр <a class="xref" href="runtime-config-compatible#GUC-PARTITION-BACKEND">partition_backend</a> имеет значение <code class="literal">pg_pathman</code>. Другие формы могут использоваться для таблиц, которые уже секционированы с использованием <code class="filename">pg_pathman</code> и не зависят от значения <a class="xref" href="runtime-config-compatible#GUC-PARTITION-BACKEND">partition_backend</a>.<p>Начиная с <span class="productname">Postgres Pro</span> 12, использовать <span class="application">pg_pathman</span> не рекомендуется.<p><div class="variablelist"><dl class="variablelist"><dt><span class="term"><code class="literal">PARTITION BY <em class="replaceable"><code>предложение_разбиения_pg_pathman</code></em></code></span><dd><p>Эта форма разделяет создаваемую таблицу на секции согласно указанному предложению разбиения. Вы можете также применять эту форму к секциям, которые создаёт <code class="filename">pg_pathman</code>, для организации <a class="link" href="pg-pathman#PG-PATHMAN-MULTILEVEL-PARTITIONING" title="F.41.2.5. Реализация многоуровневого секционирования">многоуровневого секционирования</a>. Указываемое здесь <em class="replaceable"><code>предложение_разбиения_pg_pathman</code></em> может быть следующим:<div class="variablelist"><dl class="variablelist"><dt><span class="term"><code class="literal">HASH ( <em class="replaceable"><code>ключ_разбиения</code></em> ) PARTITIONS ( <em class="replaceable"><code>число_секций</code></em> ) [ CONCURRENTLY ]</code></span><dd><p>Разделить таблицу на заданное число секций по значению хеш-функции. В качестве <em class="replaceable"><code>ключа_разбиения</code></em> может задаваться имя столбца или выражение.<dt><span class="term"><code class="literal">RANGE ( <em class="replaceable"><code>ключ_разбиения</code></em> ) START FROM ( <em class="replaceable"><code>начальное_значение</code></em> ) INTERVAL ( <em class="replaceable"><code>значение</code></em> ) [ CONCURRENTLY ]</code></span><dd><p>Разделить таблицу на секции по диапазонам. В качестве <em class="replaceable"><code>ключа_разбиения</code></em> можно указать имя столбца или выражение. Предложение <code class="literal">START FROM</code> задаёт нижнюю границу первой секции, а <code class="literal">INTERVAL</code> задаёт интервал, с которым будут создаваться новые секции. Указанное <em class="replaceable"><code>начальное_значение</code></em> не должно превышать минимальное значение в столбце разбиения и должно иметь такой же тип. Тот же тип должно иметь и значение, определяющее интервал.</dl></div><p>Если указать необязательное предложение <code class="literal">CONCURRENTLY</code>, <code class="filename">pg_pathman</code> сначала создаст пустые секции, а затем перенесёт в них данные порциями по 1000 строк во избежание блокировок.<dt><span class="term"><code class="literal">ADD PARTITION <em class="replaceable"><code>имя_секции</code></em> VALUES LESS THAN (<em class="replaceable"><code>значение</code></em>)</code></span><dd><p>Эта форма добавляет новую секцию в таблицу, разбиваемую по диапазонам. Предложение <code class="literal">VALUES LESS THAN</code> определяет диапазон значений, которые будут включаться в одну секцию. Указанное <em class="replaceable"><code>значение</code></em> в создаваемую секцию не попадает.<dt><span class="term"><code class="literal">DROP PARTITION <em class="replaceable"><code>имя_секции</code></em></code></span><dd><p>Эта форма удаляет указанную секцию.<dt><span class="term"><code class="literal">MERGE PARTITIONS <em class="replaceable"><code>имя_секции</code></em> [, ... ] INTO PARTITION <em class="replaceable"><code>имя_секции</code></em> [ TABLESPACE <em class="replaceable"><code>табл_пространство</code></em> ]</code></span><dd><p>Эта форма объединяет две или более соседних диапазонных секции в одну.<dt><span class="term"><code class="literal">MOVE PARTITION <em class="replaceable"><code>имя_секции</code></em> TABLESPACE <em class="replaceable"><code>табл_пространство</code></em></code></span><dd><p>Эта форма перемещает секцию в указанное табличное пространство.<dt><span class="term"><code class="literal">RENAME PARTITION <em class="replaceable"><code>имя_секции</code></em> TO <em class="replaceable"><code>новое_имя_секции</code></em></code></span><dd><p>Эта форма переименовывает секцию.<dt><span class="term"><code class="literal">SET INTERVAL (<em class="replaceable"><code>значение</code></em>)</code></span><dd><p>Эта форма задаёт интервал разбиения, который будет использоваться при создании новых диапазонных секций. Она поддерживается только для уже секционированных таблиц.<dt><span class="term"><code class="literal">SPLIT PARTITION <em class="replaceable"><code>имя_секции</code></em> AT (<em class="replaceable"><code>значение</code></em>) [ INTO ( PARTITION <em class="replaceable"><code>левая_секция</code></em> [ TABLESPACE <em class="replaceable"><code>табл_пространство1</code></em> ], PARTITION <em class="replaceable"><code>правая_секция</code></em> [ TABLESPACE <em class="replaceable"><code>табл_пространство2</code></em> ] ) ]</code></span><dd><p>Эта форма разделяет указанную диапазонную секцию на две по значению, заданному предложением <code class="literal">AT</code>. Это значение будет нижней границей правой секции. Если при разделении секции опустить предложение <code class="literal">INTO</code>, левая секция получит имя родительской секции, а имя правой будет сгенерировано автоматически.</dl></div><p><p>Все формы ALTER TABLE, затрагивающие одну таблицу, кроме <code class="literal">RENAME</code>, <code class="literal">SET SCHEMA</code>, <code class="literal">ATTACH PARTITION</code> и <code class="literal">DETACH PARTITION</code>, а также все формы <code class="filename">pg_pathman</code> можно объединить в набор множественных изменений и применить вместе. Например, можно добавить несколько столбцов и/или изменить тип столбцов в одной команде. Это особенно полезно для больших таблиц, так как вся таблица обрабатывается за один проход.<p>Выполнить <code class="command">ALTER TABLE</code> может только владелец соответствующей таблицы. Чтобы сменить схему или табличное пространство таблицы, необходимо также иметь право <code class="literal">CREATE</code> в новой схеме или табличном пространстве. Чтобы сделать таблицу потомком другой таблицы, нужно быть владельцем и родительской таблицы. Также, чтобы подсоединить таблицу к другой в качестве секции, необходимо быть владельцем подсоединяемой таблицы. Чтобы сменить владельца, необходимо быть непосредственным или опосредованным членом новой роли-владельца, а эта роль должна иметь право <code class="literal">CREATE</code> в схеме таблицы. (С такими ограничениями при смене владельца не происходит ничего такого, что нельзя было бы сделать, имея право удалить и вновь создать таблицу. Однако суперпользователь может сменить владельца таблицы в любом случае.) Чтобы добавить столбец, сменить тип столбца или применить предложение <code class="literal">OF</code>, необходимо также иметь право <code class="literal">USAGE</code> для соответствующего типа данных.</div><div class="refsect1" id="id-1.9.3.36.6"><h2>Параметры</h2><div class="variablelist"><dl class="variablelist"><dt><span class="term"><code class="literal">IF EXISTS</code></span><dd><p>Не считать ошибкой, если таблица не существует. В этом случае будет выдано замечание.<dt><span class="term"><em class="replaceable"><code>имя</code></em></span><dd><p>Имя (возможно, дополненное схемой) существующей таблицы, подлежащей изменению. Если перед именем таблицы указано <code class="literal">ONLY</code>, изменяется только заданная таблица. Без <code class="literal">ONLY</code> изменяется и заданная таблица, и все её потомки (если таковые есть). После имени таблицы можно также добавить необязательное указание <code class="literal">*</code>, чтобы явно обозначить, что изменению подлежат все дочерние таблицы.<dt><span class="term"><em class="replaceable"><code>имя_столбца</code></em></span><dd><p>Имя нового или существующего столбца.<dt><span class="term"><em class="replaceable"><code>новое_имя_столбца</code></em></span><dd><p>Новое имя существующего столбца.<dt><span class="term"><em class="replaceable"><code>новое_имя</code></em></span><dd><p>Новое имя таблицы.<dt><span class="term"><em class="replaceable"><code>тип_данных</code></em></span><dd><p>Тип данных нового столбца или новый тип данных существующего столбца.<dt><span class="term"><em class="replaceable"><code>ограничение_таблицы</code></em></span><dd><p>Новое ограничение таблицы.<dt><span class="term"><em class="replaceable"><code>имя_ограничения</code></em></span><dd><p>Имя нового или существующего ограничения.<dt><span class="term"><code class="literal">CASCADE</code></span><dd><p>Автоматически удалять объекты, зависящие от удаляемого столбца или ограничения (например, представления, содержащие этот столбец), и, в свою очередь, все зависящие от них объекты (см. <a class="xref" href="ddl-depend" title="5.14. Отслеживание зависимостей">Раздел 5.14</a>).<dt><span class="term"><code class="literal">RESTRICT</code></span><dd><p>Отказать в удалении столбца или ограничения, если существуют зависящие от них объекты. Это поведение по умолчанию.<dt><span class="term"><em class="replaceable"><code>имя_триггера</code></em></span><dd><p>Имя включаемого или отключаемого триггера.<dt><span class="term"><code class="literal">ALL</code></span><dd><p>Отключить или включить все триггеры, принадлежащие таблице. (Для этого требуются права суперпользователя, если в числе этих триггеров оказываются сгенерированные внутрисистемные триггеры исключений, например те, что реализуют ограничения внешнего ключа или отложенные ограничения уникальности и исключений.)<dt><span class="term"><code class="literal">USER</code></span><dd><p>Отключить или включить все триггеры, принадлежащие таблице, за исключением сгенерированных внутрисистемных триггеров исключений, например, тех, что реализуют ограничения внешнего ключа или отложенные ограничения уникальности и исключений.<dt><span class="term"><em class="replaceable"><code>имя_индекса</code></em></span><dd><p>Имя существующего индекса.<dt><span class="term"><em class="replaceable"><code>параметр_хранения</code></em></span><dd><p>Имя параметра хранения таблицы<dt><span class="term"><em class="replaceable"><code>значение</code></em></span><dd><p>Новое значение параметра хранения таблицы. Это может быть число или строка, в зависимости от параметра.<dt><span class="term"><em class="replaceable"><code>таблица_родитель</code></em></span><dd><p>Родительская таблица, с которой будет установлена или разорвана связь данной таблицы.<dt><span class="term"><em class="replaceable"><code>новый_владелец</code></em></span><dd><p>Имя пользователя, назначаемого новым владельцем таблицы.<dt><span class="term"><em class="replaceable"><code>новый_метод_доступа</code></em></span><dd><p>Имя метода доступа, который будет использоваться для таблицы после её преобразования.<dt><span class="term"><em class="replaceable"><code>новое_табл_пространство</code></em></span><dd><p>Имя табличного пространства, в которое будет перемещена таблица.<dt><span class="term"><em class="replaceable"><code>новая_схема</code></em></span><dd><p>Имя схемы, в которую будет перемещена таблица.<dt><span class="term"><em class="replaceable"><code>имя_секции</code></em></span><dd><p>Имя таблицы, присоединяемой в качестве новой секции, или наоборот, отсоединяемой от данной таблицы.<dt><span class="term"><em class="replaceable"><code>указание_границ_секции</code></em></span><dd><p>Указание границ для новой секции. Подробнее синтаксис этого указания рассматривается в описании <a class="xref" href="sql-createtable" title="CREATE TABLE"><span class="refentrytitle">CREATE TABLE</span></a>.</dl></div></div><div class="refsect1" id="SQL-ALTERTABLE-NOTES"><h2>Замечания</h2><p>Ключевое слово <code class="literal">COLUMN</code> не несёт смысловой нагрузки и может быть опущено.<p>Когда конструкция <code class="literal">ADD COLUMN</code> добавляет столбец и для него задано неизменчивое выражение <code class="literal">DEFAULT</code>, значение по умолчанию вычисляется во время выполнения оператора и сохраняется в метаданных таблицы. Это значение затем будет использовано в качестве содержимого столбца для всех существующих строк. Если указание <code class="literal">DEFAULT</code> отсутствует, столбец будет содержать NULL. В обоих случаях перезапись таблицы не требуется.<p>Добавление столбца с изменчивым выражением <code class="literal">DEFAULT</code> или изменение типа существующего столбца влечёт за собой перезапись всей таблицы и её индексов. Но возможно исключение при смене типа существующего столбца: если предложение <code class="literal">USING</code> не меняет содержимое столбца и старый тип двоично приводится к новому или является неограниченным доменом поверх нового типа, то перезапись таблицы не требуется. Тем не менее, индексы нужно перестраивать в любом случае, кроме случаев, когда система может определить, что новый индекс будет логически эквивалентен существующему. Например, когда меняется правило сортировки для столбца, индекс требуется перестроить всегда, так как новый порядок сортировки может быть другим. Однако если правило сортировки не меняется, тип столбца можно поменять с <code class="type">text</code> на <code class="type">varchar</code> (или наоборот) без перестроения индексов, так как эти типы данных сортируются одинаково. Перестроение больших таблиц и/или их индексов может быть весьма длительной процедурой, которая при этом временно требует вдвое больше места на диске.<p>Добавление ограничений <code class="literal">CHECK</code> или <code class="literal">NOT NULL</code> влечёт за собой необходимость просканировать таблицу, чтобы проверить, что все существующие строки удовлетворяют ограничению, но перезаписывать таблицу при этом не требуется.<p>Подобным образом, при присоединении новой секции может производиться её сканирование для проверки, соответствуют ли существующие строки ограничению секции.<p>Возможность объединения множества изменений в одну команду <code class="command">ALTER TABLE</code> полезна в основном тем, что позволяет совместить сканирования и перезаписи таблицы, требуемые этим операциям, и выполнить их за один проход.<p>Сканирование большой таблицы для проверки нового внешнего ключа или ограничения-проверки может занять длительное время и будет препятствовать внесению других изменений до фиксирования команды <code class="command">ALTER TABLE ADD CONSTRAINT</code>. Основное предназначение указания <code class="literal">NOT VALID</code> при добавлении ограничения состоит в уменьшении влияния этой операции на параллельные изменения данных. С указанием <code class="literal">NOT VALID</code> команда <code class="command">ADD CONSTRAINT</code> не сканирует таблицу и может быть зафиксирована немедленно. После этого можно выполнить команду <code class="literal">VALIDATE CONSTRAINT</code>, которая проверит все существующие строки на соответствие ограничению. Эта команда не будет препятствовать параллельным изменениям, так как ей известно, что в других транзакциях для добавляемых или изменяемых строк ограничение уже будет действовать; проверить нужно только уже существующие строки. Таким образом, для этой проверки в таблице затребуется только блокировка <code class="literal">SHARE UPDATE EXCLUSIVE</code>. (Если ограничение является внешним ключом, то в целевой таблице этого ключа также затребуется блокировка <code class="literal">ROW SHARE</code>.) Помимо оптимизации параллельной работы, указание <code class="literal">NOT VALID</code> и предложение <code class="literal">VALIDATE CONSTRAINT</code> полезно в случаях, когда заведомо известно, что в таблице есть строки, нарушающие ограничения. После создания ограничения добавить новые недопустимые строки будет невозможно, а все существующие проблемы могут разрешаться в удобное время, пока <code class="literal">VALIDATE CONSTRAINT</code> не выполнится успешно.<p>Форма <code class="literal">DROP COLUMN</code> не удаляет столбец физически, а просто делает его невидимым для операций SQL. При последующих операциях добавления или изменения в этот столбец будет записываться значение NULL. Таким образом, удаление столбца выполняется быстро, но при этом размер таблицы на диске не уменьшается, так как пространство, занимаемое удалённым столбцом, не высвобождается. Это пространство будет освобождено со временем, по мере изменения существующих строк.<p>Чтобы принудительно высвободить пространство, занимаемое столбцом, который был удалён, можно выполнить одну из форм <code class="command">ALTER TABLE</code>, производящих перезапись всей таблицы. В результате все строки будут воссозданы так, что в удалённом столбце будет содержаться NULL.<p>Перезаписывающие формы <code class="command">ALTER TABLE</code> небезопасны с точки зрения MVCC. После перезаписи таблица будет выглядеть пустой для параллельных транзакций, если они работают со снимком, полученным до момента перезаписи. За подробностями обратитесь к <a class="xref" href="mvcc-caveats" title="13.6. Ограничения">Разделу 13.6</a>.<p>В указании <code class="literal">USING</code> предложения <code class="literal">SET DATA TYPE</code> на самом деле можно записать выражение со старыми значениями строки; то есть, оно может ссылаться как на преобразуемые столбцы, так и на другие. Это позволяет записывать в <code class="literal">SET DATA TYPE</code> очень общие преобразования данных. Ввиду такой гибкости, выражение <code class="literal">USING</code> не применяется к значению по умолчанию данного столбца (если таковое есть); результат может быть не константным выражением, что требуется для значения по умолчанию. Это означает, что в случае отсутствия явного приведения или присваивания старого типа новому, <code class="literal">SET DATA TYPE</code> может не справиться с преобразованием значения по умолчанию, несмотря на то, что применяется предложение <code class="literal">USING</code>. В этих случаях нужно удалить значение по умолчанию с помощью <code class="literal">DROP DEFAULT</code>, выполнить <code class="literal">ALTER TYPE</code>, а затем с помощью <code class="literal">SET DEFAULT</code> задать новое подходящее значение по умолчанию. Подобные соображения применимы и в отношении индексов и ограничений с этим столбцом.<p>Если у таблицы имеются дочерние таблицы, то добавлять, переименовывать столбцы или менять их тип в родительской таблице, не повторяя ту же операцию в дочерних таблицах, нельзя. Это правило гарантирует, что столбцы в дочерних таблицах всегда соответствуют родительской. Подобным образом, нельзя переименовать ограничение <code class="literal">CHECK</code> в родительской таблице, не переименовывая его во всех дочерних таблицах, что тоже гарантирует соответствие всех ограничений <code class="literal">CHECK</code>. (Однако это не касается ограничений, построенных на индексах.) И так как выборка из родительской таблицы влечёт за собой выборку из всех потомков, ограничение родителя не может быть помечено как действующее, если оно также не является действующим в потомках. Во всех этих случаях команда <code class="command">ALTER TABLE ONLY</code> не будет выполнена.<p>Рекурсивная операция <code class="literal">DROP COLUMN</code> удалит столбец из дочерней таблицы, только если этот столбец не наследуется от каких-то других родителей и никогда не был определён в дочерней таблице независимо. Нерекурсивная операция <code class="literal">DROP COLUMN</code> (т. е., <code class="command">ALTER TABLE ONLY ... DROP COLUMN</code>) никогда не удаляет унаследованные столбцы; вместо этого она помечает их как независимо определённые, а не наследуемые. С секционированной таблицей нерекурсивная команда <code class="literal">DROP COLUMN</code> выдаст ошибку, так как все секции таблицы должны содержать те же столбцы, что и главная таблица.<p>Действия для столбцов идентификации (<code class="literal">ADD GENERATED</code>, <code class="literal">SET</code> и т. д., <code class="literal">DROP IDENTITY</code>), а также действия <code class="literal">CLUSTER</code>, <code class="literal">OWNER</code> и <code class="literal">TABLESPACE</code>, никогда не распространяются рекурсивно на дочерние таблицы; то есть они всегда выполняются так, как будто указано <code class="literal">ONLY</code>. Действия, влияющие на состояния триггеров, распространяются рекурсивно на секции секционированных таблиц (если не указано <code class="literal">ONLY</code>), но не на потомков в традиционной иерархии наследования. Операция добавления ограничения выполняется рекурсивно только для ограничений <code class="literal">CHECK</code>, не помеченных как <code class="literal">NO INHERIT</code>.<p>Какие-либо изменения таблиц системного каталога не допускаются.<p>За более подробным описанием допустимых параметров обратитесь к <a class="xref" href="sql-createtable" title="CREATE TABLE"><span class="refentrytitle">CREATE TABLE</span></a>. Дополнительно о наследовании можно узнать в <a class="xref" href="ddl" title="Глава 5. Определение данных">Главе 5</a>.</div><div class="refsect1" id="id-1.9.3.36.8"><h2>Примеры</h2><p>Добавление в таблицу столбца типа <code class="type">varchar</code>: <pre class="programlisting">ALTER TABLE distributors ADD COLUMN address varchar(30);</pre><p> При этом во всех существующих строках таблицы новый столбец получит значение null.<p>Добавление столбца со значением по умолчанию (отличным от NULL): <pre class="programlisting">ALTER TABLE measurements
+  ADD COLUMN mtime timestamp with time zone DEFAULT now();</pre><p> В существующих строках новый столбец будет содержать текущее время, а в добавляемых впоследствии строках — время их добавления.<p>Добавление столбца и заполнение его значением, отличным от значения по умолчанию, которое будет использоваться в дальнейшем: <pre class="programlisting">ALTER TABLE transactions
+  ADD COLUMN status varchar(30) DEFAULT 'old',
+  ALTER COLUMN status SET default 'current';</pre><p> Существующие строки будут заполнены значением <code class="literal">old</code>, но для последующих команд значением по умолчанию будет <code class="literal">current</code>. Результат этих двух указаний в одной команде будет таким же, как и при выполнении их в отдельных командах <code class="command">ALTER TABLE</code>.<p>Удаление столбца из таблицы: <pre class="programlisting">ALTER TABLE distributors DROP COLUMN address RESTRICT;</pre><p>Изменение типов двух существующих столбцов в одной операции: <pre class="programlisting">ALTER TABLE distributors
+    ALTER COLUMN address TYPE varchar(80),
+    ALTER COLUMN name TYPE varchar(100);</pre><p>Смена типа целочисленного столбца, содержащего время в стиле Unix, на тип <code class="type">timestamp with time zone</code> с применением предложения <code class="literal">USING</code>: <pre class="programlisting">ALTER TABLE foo
+    ALTER COLUMN foo_timestamp SET DATA TYPE timestamp with time zone
+    USING
+        timestamp with time zone 'epoch' + foo_timestamp * interval '1 second';</pre><p>То же самое, но в случае, когда у столбца есть значение по умолчанию, не приводимое автоматически к новому типу данных: <pre class="programlisting">ALTER TABLE foo
+    ALTER COLUMN foo_timestamp DROP DEFAULT,
+    ALTER COLUMN foo_timestamp TYPE timestamp with time zone
+    USING
+        timestamp with time zone 'epoch' + foo_timestamp * interval '1 second',
+    ALTER COLUMN foo_timestamp SET DEFAULT now();</pre><p>Переименование существующего столбца: <pre class="programlisting">ALTER TABLE distributors RENAME COLUMN address TO city;</pre><p>Переименование существующей таблицы: <pre class="programlisting">ALTER TABLE distributors RENAME TO suppliers;</pre><p>Переименование существующего ограничения: <pre class="programlisting">ALTER TABLE distributors RENAME CONSTRAINT zipchk TO zip_check;</pre><p>Добавление в столбец ограничения NOT NULL: <pre class="programlisting">ALTER TABLE distributors ALTER COLUMN street SET NOT NULL;</pre><p> Удаление ограничения NOT NULL из столбца: <pre class="programlisting">ALTER TABLE distributors ALTER COLUMN street DROP NOT NULL;</pre><p>Добавление ограничения-проверки в таблицу и все её потомки: <pre class="programlisting">ALTER TABLE distributors ADD CONSTRAINT zipchk CHECK (char_length(zipcode) = 5);</pre><p>Добавление ограничения-проверки только в таблицу, но не в её потомки: <pre class="programlisting">ALTER TABLE distributors ADD CONSTRAINT zipchk CHECK (char_length(zipcode) = 5) NO INHERIT;</pre><p> (Данное ограничение-проверка не будет наследоваться и будущими потомками тоже.)<p>Удаление ограничения-проверки из таблицы и из всех её потомков: <pre class="programlisting">ALTER TABLE distributors DROP CONSTRAINT zipchk;</pre><p>Удаление ограничения-проверки только из самой таблицы: <pre class="programlisting">ALTER TABLE ONLY distributors DROP CONSTRAINT zipchk;</pre><p> (Ограничение-проверка остаётся во всех дочерних таблицах.)<p>Добавление в таблицу ограничения внешнего ключа: <pre class="programlisting">ALTER TABLE distributors ADD CONSTRAINT distfk FOREIGN KEY (address) REFERENCES addresses (address);</pre><p>Добавление в таблицу ограничения внешнего ключа с наименьшим влиянием на работу других: <pre class="programlisting">ALTER TABLE distributors ADD CONSTRAINT distfk FOREIGN KEY (address) REFERENCES addresses (address) NOT VALID;
+ALTER TABLE distributors VALIDATE CONSTRAINT distfk;</pre><p>Добавление в таблицу ограничения уникальности (по нескольким столбцам): <pre class="programlisting">ALTER TABLE distributors ADD CONSTRAINT dist_id_zipcode_key UNIQUE (dist_id, zipcode);</pre><p>Добавление в таблицу первичного ключа с автоматическим именем (учтите, что в таблице может быть только один первичный ключ): <pre class="programlisting">ALTER TABLE distributors ADD PRIMARY KEY (dist_id);</pre><p>Перемещение таблицы в другое табличное пространство: <pre class="programlisting">ALTER TABLE distributors SET TABLESPACE fasttablespace;</pre><p>Перемещение таблицы в другую схему: <pre class="programlisting">ALTER TABLE myschema.distributors SET SCHEMA yourschema;</pre><p>Пересоздание ограничения первичного ключа без блокировки изменений в процессе перестроения индекса: <pre class="programlisting">CREATE UNIQUE INDEX CONCURRENTLY dist_id_temp_idx ON distributors (dist_id);
+ALTER TABLE distributors DROP CONSTRAINT distributors_pkey,
+    ADD CONSTRAINT distributors_pkey PRIMARY KEY USING INDEX dist_id_temp_idx;</pre><p>Присоединение секции к таблице, разбиваемой по диапазонам: <pre class="programlisting">ALTER TABLE measurement
+    ATTACH PARTITION measurement_y2016m07 FOR VALUES FROM ('2016-07-01') TO ('2016-08-01');</pre><p>Присоединение секции к таблице, разбиваемой по списку: <pre class="programlisting">ALTER TABLE cities
+    ATTACH PARTITION cities_ab FOR VALUES IN ('a', 'b');</pre><p>Присоединение секции к таблице, разбиваемой по хешу: <pre class="programlisting">ALTER TABLE orders
+    ATTACH PARTITION orders_p4 FOR VALUES WITH (MODULUS 4, REMAINDER 3);</pre><p>Присоединение секции по умолчанию к секционированной таблице: <pre class="programlisting">ALTER TABLE cities
+    ATTACH PARTITION cities_partdef DEFAULT;</pre><p>Удаление секции из секционированной таблицы: <pre class="programlisting">ALTER TABLE measurement
+    DETACH PARTITION measurement_y2015m12;</pre><p>Секционирование существующей таблицы по диапазонам с интервалом 100 и последующее разделение секции <code class="structname">journal_1</code> на две (с использованием <code class="filename">pg_pathman</code>): <pre class="programlisting">ALTER TABLE journal
+    PARTITION BY RANGE(id)
+    START FROM (0)
+    INTERVAL (100);</pre><p><pre class="programlisting">ALTER TABLE journal
+    SPLIT PARTITION journal_1
+    AT (50)
+    INTO (PARTITION journal_050, PARTITION journal_100);</pre><p>Добавление новой секции в таблицу <code class="structname">journal</code>, секционированную по диапазонам (с использованием <code class="filename">pg_pathman</code>): <pre class="programlisting">ALTER TABLE journal
+    ADD PARTITION journal_300
+    VALUES LESS THAN (300);</pre><p>Объединение двух соседних секций таблицы <code class="structname">journal</code> в одну: <pre class="programlisting">ALTER TABLE journal
+    MERGE PARTITIONS journal_050 INTO PARTITION journal_100;</pre><p>Секционирование существующей таблицы по хешу с использованием <code class="filename">pg_pathman</code>: <pre class="programlisting">ALTER TABLE journal
+    PARTITION BY HASH PARTITIONS (3);</pre></div><div class="refsect1" id="id-1.9.3.36.9"><h2>Совместимость</h2><p>Формы <code class="literal">ADD</code> (без <code class="literal">USING INDEX</code>), <code class="literal">DROP [COLUMN]</code>, <code class="literal">DROP IDENTITY</code>, <code class="literal">RESTART</code>, <code class="literal">SET DEFAULT</code>, <code class="literal">SET DATA TYPE</code> (без <code class="literal">USING</code>), <code class="literal">SET GENERATED</code> и <code class="literal">SET <em class="replaceable"><code>параметр_последовательности</code></em></code> соответствуют стандарту SQL. Другие формы являются расширениями стандарта SQL, реализованными в <span class="productname">Postgres Pro</span>. Кроме того, расширением является возможность указать в одной команде <code class="command">ALTER TABLE</code> несколько операций изменения.<p><code class="command">ALTER TABLE DROP COLUMN</code> позволяет удалить единственный столбец таблицы и оставить таблицу без столбцов. Это является расширением стандарта SQL, который не допускает существование таблиц с нулём столбцов.</div><div class="refsect1" id="id-1.9.3.36.10"><h2>См. также</h2><span class="simplelist"><a class="xref" href="sql-createtable" title="CREATE TABLE"><span class="refentrytitle">CREATE TABLE</span></a></span></div></div><div class="navfooter"><hr /><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="sql-altersystem" title="ALTER SYSTEM">Пред.</a> </td><td align="center" width="20%"><a accesskey="u" href="sql-commands" title="Команды SQL">Наверх</a></td><td align="right" width="40%"> <a accesskey="n" href="sql-altertablespace" title="ALTER TABLESPACE">След.</a></td></tr><tr><td align="left" valign="top" width="40%">ALTER SYSTEM </td><td align="center" width="20%"><a accesskey="h" href="index" title="Документация к Postgres Pro Enterprise 15.4.3">Начало</a></td><td align="right" valign="top" width="40%"> ALTER TABLESPACE</td></tr></table></div></div>
+		
+    </div>
+    <div class="col-md-12 d-none" id="divDocEn"></div>
+</div>
+</div>
+</section>
+
+
+	</div>
+    </main>
+
+	
+<div class="modal fade" id="feedback" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" >Есть&nbsp;вопросы? Напишите&nbsp;нам!</h5>
+      </div>
+      <div class="modal-body">
+			<input type="text" id="feedback-email" name="email" placeholder='E-mail'
+				required        msg-empty="Введите e-mail"
+				min-length="3"  msg-short="Слишком короткий e-mail"
+				max-length="60" msg-long="Слишком длинный e-mail"
+				regexp="\w+([\-+.']\w+)*@\w+([\-.]\w+)*\.\w+([\-.]\w+)*" 
+				                msg-regexp="Некорректный адрес e-mail"
+			><div class="input-error"></div>
+			
+			<input type="text" id="feedback-name" name="name" placeholder="Имя" 
+				required        msg-empty="Введите имя"
+				min-length="3"  msg-short="Слишком короткое имя"
+				max-length="60" msg-long ="Слишком длинное имя"
+			><div class="input-error"></div>
+			 
+			<textarea id="feedback-message" name="message"  placeholder="Ваше сообщение" 
+                required          msg-empty="Введите сообщение"
+				max-length="6000" msg-long="Слишком длинное сообщение"
+				min-length="10"   msg-short="Слишком короткое сообщение"
+			></textarea>
+			<div id="feedback-message-length" class="input-error"></div> 
+
+			<label style="  display: inline;cursor: pointer;">
+				<input type="checkbox" id="feedback-agree" name="feedback-agree" 
+					required msg-empty="Согласие необходимо"> 
+				<div id="feedback-agree-length" class="input-error"></div> 
+				Соглашаюсь с условиями обработки 
+			</label> <span class="dotted"  onClick="loadAgreement();">персональных данных</span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" style="width: 100%;" onClick="sendFeedback('feedback', 'message', '', '', 'production')">Отправить</button>
+      </div>
+      
+        
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="popup-message" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"></h5>
+      </div>
+      <div class="modal-body lead  text-center" ></div>
+      <div class="modal-footer"></div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="popup-flash" tabindex="-1" role="dialog" aria-hidden="true"  style="cursor:wait;">
+  <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"></h5>
+      </div>
+      <div class="modal-body text-center"></div>
+      <div class="modal-footer"></div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="popup-window" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+		<div class="pop-up-close" onClick="closePopupWindow('#popup-window');">&#10006;</div>
+      <div class="modal-header">
+        <h5 class="modal-title"></h5>
+      </div>
+      <div class="modal-body "></div>
+      <div class="modal-footer"></div>
+    </div>
+  </div>
+</div>
+
+
+	
+	<form action="/search/" method="get" role="form" name="search-window" id="search-window" onSubmit="document.body.style.cursor='progress';return true;">
+		<input id="qid" name="q">
+		
+			
+				<input type="hidden" id="area-version" name="area" value="version" checked >
+				<input type="hidden" id="area-product" name="product" value="enterprise" >
+				<input type="hidden" id="area-version" name="version" value="15" >
+			
+		
+	</form>
+
+
+<!-- FOOTER -->
+    <footer class="container-fluid">
+ 		<div class="container">
+ 		<div class="row">
+			<div  class="about col-lg-3 row" style="margin-bottom:2em;">
+				<div class="col-sm-6 col-lg-12"> 
+					<a href="/" ><img src="/img/PostgresPro_logo_white.svg" class="logo" alt="Postgres Pro"></a> 
+	
+					<div class="sociallinks" style="margin-bottom:0.6em;margin-top:2em;"> 
+
+						<div class="sociallinks-item"> 
+							<a href="https://vk.com/public101507899" target="_blank"> 
+							<svg class="t-sociallinks__svg" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="25px" height="25px" viewBox="0 0 48 48" enable-background="new 0 0 48 48" xml:space="preserve"><desc>VK</desc><path style="fill:#ffffff;" d="M47.761,24c0,13.121-10.639,23.76-23.76,23.76C10.878,47.76,0.239,37.121,0.239,24c0-13.123,10.639-23.76,23.762-23.76C37.122,0.24,47.761,10.877,47.761,24 M35.259,28.999c-2.621-2.433-2.271-2.041,0.89-6.25c1.923-2.562,2.696-4.126,2.45-4.796c-0.227-0.639-1.64-0.469-1.64-0.469l-4.71,0.029c0,0-0.351-0.048-0.609,0.106c-0.249,0.151-0.414,0.505-0.414,0.505s-0.742,1.982-1.734,3.669c-2.094,3.559-2.935,3.747-3.277,3.524c-0.796-0.516-0.597-2.068-0.597-3.171c0-3.449,0.522-4.887-1.02-5.259c-0.511-0.124-0.887-0.205-2.195-0.219c-1.678-0.016-3.101,0.007-3.904,0.398c-0.536,0.263-0.949,0.847-0.697,0.88c0.31,0.041,1.016,0.192,1.388,0.699c0.484,0.656,0.464,2.131,0.464,2.131s0.282,4.056-0.646,4.561c-0.632,0.347-1.503-0.36-3.37-3.588c-0.958-1.652-1.68-3.481-1.68-3.481s-0.14-0.344-0.392-0.527c-0.299-0.222-0.722-0.298-0.722-0.298l-4.469,0.018c0,0-0.674-0.003-0.919,0.289c-0.219,0.259-0.018,0.752-0.018,0.752s3.499,8.104,7.573,12.23c3.638,3.784,7.764,3.36,7.764,3.36h1.867c0,0,0.566,0.113,0.854-0.189c0.265-0.288,0.256-0.646,0.256-0.646s-0.034-2.512,1.129-2.883c1.15-0.36,2.624,2.429,4.188,3.497c1.182,0.812,2.079,0.633,2.079,0.633l4.181-0.056c0,0,2.186-0.136,1.149-1.858C38.281,32.451,37.763,31.321,35.259,28.999"></path></svg> </a> </div> 
+						<div class="sociallinks-item"> 
+							<a href="https://www.youtube.com/@PostgresProfessional" target="_blank"> 
+							<svg class="t-sociallinks__svg" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="25px" height="25px" viewBox="0 0 48 48" enable-background="new 0 0 48 48" xml:space="preserve"><desc>Youtube</desc><path style="fill:#ffffff;" d="M24 0.0130005C37.248 0.0130005 47.987 10.753 47.987 24C47.987 37.247 37.247 47.987 24 47.987C10.753 47.987 0.0130005 37.247 0.0130005 24C0.0130005 10.753 10.752 0.0130005 24 0.0130005ZM35.815 18.093C35.565 16.756 34.452 15.758 33.173 15.635C30.119 15.439 27.054 15.28 23.995 15.278C20.936 15.276 17.882 15.432 14.828 15.625C13.544 15.749 12.431 16.742 12.182 18.084C11.898 20.017 11.756 21.969 11.756 23.92C11.756 25.871 11.898 27.823 12.182 29.756C12.431 31.098 13.544 32.21 14.828 32.333C17.883 32.526 20.935 32.723 23.995 32.723C27.053 32.723 30.121 32.551 33.173 32.353C34.452 32.229 35.565 31.084 35.815 29.747C36.101 27.817 36.244 25.868 36.244 23.919C36.244 21.971 36.101 20.023 35.815 18.093ZM21.224 27.435V20.32L27.851 23.878L21.224 27.435Z"></path></svg> </a> </div>
+							
+						<div class="sociallinks-item"> 
+							<a href="https://t.me/postgres_pro" target="_blank"> 
+								<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="25" height="25" viewBox="0,0,256,256">
+								<g transform="translate(-10.24,-10.24) scale(1.08,1.08)"><g fill="#164281" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M9.48148,246.51852v-237.03704h237.03704v237.03704z" id="bgRectangle"></path></g><g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(5.12,5.12)"><path d="M25,2c12.703,0 23,10.297 23,23c0,12.703 -10.297,23 -23,23c-12.703,0 -23,-10.297 -23,-23c0,-12.703 10.297,-23 23,-23zM32.934,34.375c0.423,-1.298 2.405,-14.234 2.65,-16.783c0.074,-0.772 -0.17,-1.285 -0.648,-1.514c-0.578,-0.278 -1.434,-0.139 -2.427,0.219c-1.362,0.491 -18.774,7.884 -19.78,8.312c-0.954,0.405 -1.856,0.847 -1.856,1.487c0,0.45 0.267,0.703 1.003,0.966c0.766,0.273 2.695,0.858 3.834,1.172c1.097,0.303 2.346,0.04 3.046,-0.395c0.742,-0.461 9.305,-6.191 9.92,-6.693c0.614,-0.502 1.104,0.141 0.602,0.644c-0.502,0.502 -6.38,6.207 -7.155,6.997c-0.941,0.959 -0.273,1.953 0.358,2.351c0.721,0.454 5.906,3.932 6.687,4.49c0.781,0.558 1.573,0.811 2.298,0.811c0.725,0 1.107,-0.955 1.468,-2.064z"></path></g></g></g>
+								</svg>
+							</a>
+						 </div>							 
+					</div>
+					<br>
+					<span class="copyright">©  Postgres Pro</span>
+				</div>
+				
+				<div  class="col-sm-6 col-lg-12" style="margin-top:2em;">
+					<a href="/privacy">Политика конфиденциальности</a><br>
+					<a href="/useragreement">Пользовательское соглашение</a><br>
+					<a href="/products/postgrespro/eula">Лицензионное соглашение</a><br>
+					<a href="/media/RUS_EULA_for_cloud_Postgres_Pro_Standard_Postgres_Pro_Enterprise.pdf" target="_blank">Лицензионное соглашение (при использовании в составе облачных сервисов)</a><br>
+					<a href="/CoC">Кодекс поведения сообщества PostgreSQL</a>
+				</div>
+			</div>
+
+			<nav class="col-lg-9 bottom-menu"> 
+				
+<nav>
+<ul class="row">
+<li class="col-sm-4">
+	<h6>
+	
+		Продукты
+	
+	</h6>
+
+	
+		<ul><li>
+					
+						<a href="/products/postgrespro/standard" >Postgres Pro Standard</a>
+					
+				</li><li>
+					
+						<a href="/products/postgrespro/certified" >Postgres Pro Certified</a>
+					
+				</li><li>
+					
+						<a href="/products/postgrespro/enterprise" >Postgres Pro Enterprise</a>
+					
+				</li><li>
+					
+						<a href="/products/postgrespro/enterprisecertified" >Postgres Pro Enterprise Certified</a>
+					
+				</li><li>
+					
+						<a href="/products/PPEM" >Postgres Pro Enterprise Manager</a>
+					
+				</li><li>
+					
+						<a href="/products/shardman" >Postgres Pro Shardman</a>
+					
+				</li><li>
+					
+						<a href="/products/1c" >Postgres Pro для 1С</a>
+					
+				</li><li>
+					
+						<a href="/windows" >PostgreSQL для Windows</a>
+					
+				</li></ul>
+	
+</li><li class="col-sm-4">
+	<h6>
+	
+		Образование
+	
+	</h6>
+
+	
+		<ul><li>
+					
+						<a href="/docs" >Документация</a>
+					
+				</li><li>
+					
+						<a href="/education/courses" >Учебные курсы</a>
+					
+				</li><li>
+					
+						<a href="/education/books" >Книги</a>
+					
+				</li><li>
+					
+						<a href="/education/cert" >Сертификация специалистов</a>
+					
+				</li><li>
+					
+						<a href="/education/university" >Курсы для вузов</a>
+					
+				</li><li>
+					
+						<a href="/education" >Обучение PostgreSQL</a>
+					
+				</li><li>
+					
+						<a href="/education/glossary" >Глоссарий</a>
+					
+				</li></ul>
+	
+</li><li class="col-sm-4">
+	<h6>
+	
+		Услуги
+	
+	</h6>
+
+	
+		<ul><li>
+					
+						<a href="/services/support" >Техподдержка СУБД</a>
+					
+				</li><li>
+					
+						<a href="/services/migration" >Миграция СУБД</a>
+					
+				</li><li>
+					
+						<a href="/services/audit" >Аудит СУБД</a>
+					
+				</li></ul>
+	
+</li></ul>
+</nav>
+
+
+			</nav>
+		</div> 
+    	</div>
+
+		<div id="bottom-bar">
+			<div id="to-top-button" class="float-left" onClick="$('html, body').animate({scrollTop: 0});return false;">
+				<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="50px" height="50px" viewBox="0 0 48 48" enable-background="new 0 0 48 48" xml:space="preserve"> <path style="fill:#0aa7f5;" d="M43.006,47.529H4.964c-2.635,0-4.791-2.156-4.791-4.791V4.697c0-2.635,2.156-4.791,4.791-4.791h38.042 c2.635,0,4.791,2.156,4.791,4.791v38.042C47.797,45.373,45.641,47.529,43.006,47.529z M25.503,16.881l6.994,7.049 c0.583,0.588,1.532,0.592,2.121,0.008c0.588-0.583,0.592-1.533,0.008-2.122l-9.562-9.637c-0.281-0.283-0.664-0.443-1.063-0.443 c0,0,0,0-0.001,0c-0.399,0-0.782,0.159-1.063,0.442l-9.591,9.637c-0.584,0.587-0.583,1.537,0.005,2.121 c0.292,0.292,0.675,0.437,1.058,0.437c0.385,0,0.77-0.147,1.063-0.442L22.5,16.87v19.163c0,0.828,0.671,1.5,1.5,1.5 s1.5-0.672,1.5-1.5L25.503,16.881z"></path> </svg>
+			</div>
+	
+			<div class="pulsate float-right" id="bell">
+				<div class="pulsate-circle"  id="bell-run"  onClick="$('#feedback').modal('toggle'); return false;"></div>
+				<svg class="icon" width="28px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18.6 17.5" id="tip"    onClick="$('#feedback').modal('toggle'); return false;"><desc>Write</desc><path d="M3.7 17.5v-4.8H2c-1.1 0-2-.9-2-2V2C0 .9.9 0 2 0h14.6c1.1 0 2 .9 2 2v8.8c0 1.1-.9 2-2 2H9l-5.3 4.7zM2 1c-.6 0-1 .4-1 1v8.8c0 .5.4 1 1 1h2.8v3.5l3.8-3.5h8c.5 0 1-.4 1-1V2c0-.5-.4-1-1-1H2z"></path></svg> 
+				<svg class="icon" width="16px" height="16px" viewBox="0 0 23 23" version="1.1"            id="close"  onClick="$('#feedback').modal('toggle'); return false;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <desc>Close</desc> <g stroke="none" stroke-width="1" fill="#000" fill-rule="evenodd"> <rect transform="translate(11.313708, 11.313708) rotate(-45.000000) translate(-11.313708, -11.313708) " x="10.3137085" y="-3.6862915" width="2" height="30"></rect> <rect transform="translate(11.313708, 11.313708) rotate(-315.000000) translate(-11.313708, -11.313708) " x="10.3137085" y="-3.6862915" width="2" height="30"></rect> </g> </svg> 
+			</div>
+
+		</div>
+    </footer>
+	
+<script>
+checkJQuery();
+
+$(document).ready( function(){
+	window.lang = 'ru';
+	
+	$(".toggler").click(function(){
+	    $(this).next().slideToggle(150);
+	});
+
+	$("#feedback").on('hide.bs.modal', function (e) {triggerBell(e);});
+	$("#feedback").on('show.bs.modal', function (e) {triggerBell(e);});
+
+	
+
+	whoIam();
+
+	$('ul.nav li.dropdown').hover(function() {
+	  $(this).find('.dropdown-menu').stop(true, true).delay(100).fadeIn(300);
+	}, function() {
+	  $(this).find('.dropdown-menu').stop(true, true).delay(100).fadeOut(300);
+	});
+
+	var input = $('#search-window input')
+	input.focusout(function(e){
+		if (!$.trim($(this).val()).length) {
+			$('#search-window').fadeOut();
+		}
+	});
+	input.keydown(function(eventObject){
+		if( eventObject.which == 27 ){
+			if ($.trim($(this).val()).length) {
+				$(this).val('');
+			} else {
+				$('#search-window').fadeOut();
+			}
+		};
+	});
+	$(document).scroll(function () {
+		if (!$.trim(input.val()).length) {
+			$('#search-window').fadeOut();
+		}
+	});
+	
+	setTimeout(function(){
+		$("#to-top-button").addClass("animation-opacity");
+		$("#bell").addClass("animation-opacity");
+	} , 2000);
+});
+
+function triggerBell(e) {
+	var bell = $('#bell');
+	var bell2 = $('#bell-run');
+
+	bell.toggleClass('active pulsate');
+	bell2.toggleClass('active pulsate-circle');
+	bell.find('#close').toggle();
+}
+
+var formatDate_month=["января","февраля","марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"];
+var formatDate_weekday=["воскресенье","понедельник","вторник","среда","четверг", "пятница","суббота"];
+
+function formatTime(i) {
+	if (i<10) {	i="0" + i; }
+	return i;
+}
+
+function formatDate(s, format) {
+	var d = qwx.iso2time(s);
+	
+	return d.getDate() + " " + formatDate_month[d.getMonth()] + " " + d.getFullYear() + 
+		(format == 'date' ? "" : ", " + formatDate_weekday[d.getDay()] + ", " + 
+		formatTime(d.getHours()) + ":" + formatTime(d.getMinutes()));
+}
+	
+
+
+</script>	
+
+	
+
+	<script type="text/javascript">
+		var m500 = 'Произошла ошибка на сервере';
+		var incorrectFormMessage = 'Форма заполнена неправильно';
+	</script>
+	
+	
+
+
+
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N62NBGE0E2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-N62NBGE0E2');
+</script>
+
+
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function (d, w, c) {
+        (w[c] = w[c] || []).push(function() {
+            try {
+                w.yaCounter32485545 = new Ya.Metrika({
+                    id:32485545,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true
+                });
+            } catch(e) { }
+        });
+
+        var n = d.getElementsByTagName("script")[0],
+            s = d.createElement("script"),
+            f = function () { n.parentNode.insertBefore(s, n); };
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+        if (w.opera == "[object Opera]") {
+            d.addEventListener("DOMContentLoaded", f, false);
+        } else { f(); }
+    })(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/32485545" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+	
+
+	
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
