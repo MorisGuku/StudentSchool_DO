@@ -1,8 +1,9 @@
 ﻿﻿using hw_2;
+
 using System.Net;
 using Provider;
 using DbModel;
-internal class Program
+internal partial class Program
 {
     private static async Task Main(string[] args)
     {
@@ -118,7 +119,7 @@ internal class Program
                     case 4:
                         SqlCrudMenu.GetSqlMenu();
                         break;
-                    
+
                     case 5:
                         EfCrudMenu.GetEfMenu();
                         break;

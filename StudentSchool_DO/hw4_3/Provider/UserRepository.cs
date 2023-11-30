@@ -17,10 +17,11 @@ namespace hw_2
     {
         private readonly OfficeDB _dbContext = new();
 
-        private const string ConnectionString = @"Server=localhost,1433;Database=hw_3;Trusted_Connection=True;Integrated Security=False;Encrypt=False;User=sa;Password=12345Qq@;TrustServerCertificate=true";
+        private const string ConnectionString = @"Server=localhost,10001;Database=hw_3;Trusted_Connection=True;Integrated Security=False;Encrypt=False;User=sa;Password=12345Qq!;TrustServerCertificate=true";
         private const string GetUsersSQL = @"SELECT * FROM Users";
         private const string GetUserSQL = @"SELECT * FROM Users WHERE Id = '{0}'";
         private const string GetLastUserSQL = @"SELECT * FROM Users WHERE Id = '{0}' ORDER BY ID";
+
 
         public List<DbUser> GetUsersEF()
         {
@@ -73,5 +74,5 @@ namespace hw_2
         }
 
     }
-    
+
 }

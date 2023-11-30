@@ -9,7 +9,7 @@ public class UsersEfCrudMenu
     public static void GetUserEfMenu()
     {
         while(true)
-        {   
+        {
             ConsoleColorHelper.WriteMenu("Welcome to menu SQL DataBase EF CRUD works! Choose you're desteny: ");
             ConsoleColorHelper.WriteMenu("\t1 - Read data from DB");
             ConsoleColorHelper.WriteMenu("\t2 - Write data in DB");
@@ -19,7 +19,7 @@ public class UsersEfCrudMenu
             ConsoleColorHelper.WriteMenu("\t6 - Еxit the program");
             ConsoleColorHelper.WriteMenu("Your choice?");
             var inputMenu = InputConsole.IntInputCheck();
-            
+
             while(true)
             {
                 switch(inputMenu)
@@ -45,7 +45,7 @@ public class UsersEfCrudMenu
                         {
                             break;
                         }
-                        
+
                     }
 
                     case 2: //create
@@ -91,10 +91,9 @@ public class UsersEfCrudMenu
                             ConsoleColorHelper.WriteMenu("Enter User's ID for delete:");
                             var deleteUserId = InputConsole.GuidInputCheck();
                             userRepository.DeleteUser(deleteUserId);
-                            
                             var usersDataAfterDelete = userRepository.GetUsersEF();
                             ConsoleColorHelper.WriteService("Delete is done!");
-                            ConsoleColorHelper.WriteMenu("Do you want to perform the operation again(1) or exit to  previous menu(2)?"); 
+                            ConsoleColorHelper.WriteMenu("Do you want to perform the operation again(1) or exit to  previous menu(2)?");
                             if (InputConsole.IntInputCheck() == 1)
                             {
                                 inputMenu = 3;
@@ -105,7 +104,7 @@ public class UsersEfCrudMenu
                             {
                                 break;
                             }
-                            
+
                         }
 
                         catch (Exception ex)
@@ -116,7 +115,7 @@ public class UsersEfCrudMenu
                         }
 
                     }
-                    
+
                     case 4: //update
                     {
                         try
@@ -136,7 +135,7 @@ public class UsersEfCrudMenu
                             ConsoleColorHelper.WriteMenu("\t2 - LastName");
                             ConsoleColorHelper.WriteMenu("\t3 - Add to Car");
                             ConsoleColorHelper.WriteMenu("Your choice?");
-                            
+
                             string editFirstName = null;
                             string editLastName = null;
                             Guid? editKeyCar = null;
@@ -144,21 +143,21 @@ public class UsersEfCrudMenu
                             switch(attributeNumber)
                             {
                                 case 1:
-                                {   
+                                {
                                     ConsoleColorHelper.WriteMenu("Input new FirstName: ");
                                     editFirstName = Console.ReadLine();
                                     break;
                                 }
-                                
+
                                 case 2:
-                                {   
+                                {
                                     ConsoleColorHelper.WriteMenu("Input new LastName: ");
                                     editLastName = Console.ReadLine();
                                     break;
                                 }
 
                                 case 3:
-                                {   
+                                {
                                     ConsoleColorHelper.WriteService("Data from table Car:");
                                     var carRepository = new CarRepository();
                                     var carData = carRepository.GetCarsEF();
@@ -176,7 +175,7 @@ public class UsersEfCrudMenu
 
                             userRepository.EditUser(editUserId, editFirstName, editLastName, editKeyCar);
                             ConsoleColorHelper.WriteService("Edit is done!");
-                            ConsoleColorHelper.WriteMenu("Do you want to perform the operation again(1) or exit to  previous menu(2)?"); 
+                            ConsoleColorHelper.WriteMenu("Do you want to perform the operation again(1) or exit to  previous menu(2)?");
                             if (InputConsole.IntInputCheck() == 1)
                             {
                                 inputMenu = 4;
@@ -187,7 +186,7 @@ public class UsersEfCrudMenu
                             {
                                 break;
                             }
-                            
+
                         }
 
                         catch (Exception ex)
@@ -198,7 +197,7 @@ public class UsersEfCrudMenu
                         }
 
                     }
-                    
+
                     case 5:
                     {
                         return;
@@ -209,10 +208,10 @@ public class UsersEfCrudMenu
                         Environment.Exit(0);
                         break;
                     }
-                    
+
                 }
 
-            break; 
+            break;
             }
 
         }

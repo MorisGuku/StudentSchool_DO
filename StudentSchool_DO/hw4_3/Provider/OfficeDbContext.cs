@@ -4,7 +4,7 @@ namespace Provider
 {
     public class OfficeDB : DbContext
     {
-        private const string ConnectionString = @"Server=localhost,1433;Database=HW_3;Trusted_Connection=True;Integrated Security=False;Encrypt=False;User=sa;Password=12345Qq@;TrustServerCertificate=true";
+        private const string ConnectionString = @"Server=localhost,10001;Database=HW_3;Trusted_Connection=True;Integrated Security=False;Encrypt=False;User=sa;Password=12345Qq!;TrustServerCertificate=true;MultiSubnetFailover=True;";
         public DbSet<DbUser> Users { get; set; }
         public DbSet<DbSalesOffice> SalesOffices { get; set; }
         public DbSet<DbCar> Cars { get; set; }
@@ -20,9 +20,9 @@ namespace Provider
             modelBuilder.Entity<DbSalesOffice>()
               .HasKey(s => s.Id);
             modelBuilder.Entity<DbCar>()
-              .HasKey(c => c.Id);    
+              .HasKey(c => c.Id);
         }
-        
+
     }
 }
 
