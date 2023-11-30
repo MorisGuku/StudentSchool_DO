@@ -14,4 +14,3 @@ public class DbCar
     public List<DbUser> Users { get; set; } = new();
     public List<DbSalesOffice> SalesOffices { get; set; } = new();
 }
-

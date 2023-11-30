@@ -7,4 +7,3 @@ public class DbSalesOffice
     public string? AddressSalesOffice { get; set; }
     public List<DbCar> Cars { get; set; } = new();
 }
-
