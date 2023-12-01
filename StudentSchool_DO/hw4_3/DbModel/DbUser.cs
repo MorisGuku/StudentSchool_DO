@@ -3,7 +3,6 @@ using System.Runtime.InteropServices;
 namespace DbModel;
 
 public class DbUser
-
 {
     public Guid UserId { get; set; }
     public Guid CarId { get; set; }

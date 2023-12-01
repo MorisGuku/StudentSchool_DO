@@ -1,7 +1,6 @@
 namespace DbModel;
 
 public class DbSalesOffice
-
 {
     public Guid Id { get; set; }
     public string? NameSalesOffice { get; set; }
