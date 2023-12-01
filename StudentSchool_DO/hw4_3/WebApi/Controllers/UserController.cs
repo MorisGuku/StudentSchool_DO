@@ -9,21 +9,22 @@ public class UserController : ControllerBase
 {
   [HttpGet]
   public  List<UserDto> GetUsers(
-      [FromServices] IGetUserCommand command)
+      [FromServices] IUserCommand command)
   {
       return command.GetUsers();
   }
 
   [HttpGet("{id}")]
   public  UserDto GetUser(
-      [FromServices] IGetUserCommand command,
+      [FromServices] IUserCommand command,
       [FromRoute] Guid id)
   {
       return command.Get(id);
   }
+
   [HttpPost]
-  public Guid Create(
-    [FromServices] IGetUserCommand command,
+  public UserCreateResponse Create(
+    [FromServices] IUserCommand command,
     [FromBody] UserCreateDto request)
   {
     return command.Create(request);
@@ -31,17 +32,19 @@ public class UserController : ControllerBase
 
   [HttpPut("{id}")]
   public bool Update(
-    [FromServices] IGetUserCommand command,
+    [FromServices] IUserCommand command,
     [FromRoute] Guid id,
     [FromBody] UserUpdateDto request)
   {
     return command.Update(id, request);
   }
+
   [HttpDelete("{id}")]
   public bool Delete(
-    [FromServices] IGetUserCommand command,
+    [FromServices] IUserCommand command,
     [FromRoute] Guid id)
   {
     return command.Delete(id);
   }
+
 }
